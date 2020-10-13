@@ -1,0 +1,76 @@
+{
+  "name": "node_inversify",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "prettier:lint": "./node_modules/.bin/prettier -l \\\"./src/**/*.{js,jsx,css,json,scss,ts,css,sass,less}\\\"",
+    "format": "npm run prettier -- --write",
+    "lint": "./node_modules/.bin/eslint ./src/**/*.{js,ts};",
+    "lint:fix": "./node_modules/.bin/eslint --fix ./src/**/*.{js,ts}; exit 0",
+    "validate": "npm run prettier -- && npm run lint:fix",
+    "prettier": "./node_modules/.bin/prettier --write src/**/*.{js,jsx,css,json,scss,ts,css,sass,less}",
+    "prettier:format": "./node_modules/.bin/prettier --config .prettierrc 'src/**/*.ts' --write",
+    "prettier:watch": "onchange 'src/**/*.ts' -- prettier --write {{changed}}",
+    "test": "./node_modules/.bin/jest  --verbose --coverage --updateSnapshot --notify",
+    "test:watch": "./node_modules/.bin/jest --watchAll --notify='true' --verbose --coverage --updateSnapshot",
+    "prettier:check": "./node_modules/.bin/prettier -l \\\"src/**/*.{js,jsx,css,json,scss,ts,css,sass,less}\\\"",
+    "lint-staged": "./node_modules/.bin/lint-staged",
+    "start": "./node_modules/.bin/ts-node ./src/index.ts",
+    "start:watch": "./node_modules/.bin/nodemon ./src/index.ts",
+    "todo": "../scripts/todo.sh",
+    "todo:file": "../scripts/todo.sh > todo.md"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "**/*.test.ts",
+      "**/*.spec.ts",
+      ".git",
+      "node_modules"
+    ],
+    "watch": [
+      "src"
+    ],
+    "exec": "npm start",
+    "ext": "ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*.{jsx,js,md,ts,css,sass,less,yml,yaml,scss,json,vue}": [
+      "npm run format",
+      "npm run lint:fix",
+      "git add ."
+    ]
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-session": "^1.4.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "inversify": "^5.0.1",
+    "inversify-binding-decorators": "^4.0.0",
+    "inversify-express-utils": "^6.3.2",
+    "inversify-logger-middleware": "^3.1.0",
+    "passport": "^0.4.1",
+    "passport-github": "^1.1.0",
+    "passport-google-oauth2": "^0.2.0",
+    "passport-slack": "0.0.7",
+    "reflect-metadata": "^0.1.13"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.19.0",
+    "@types/express": "^4.17.8",
+    "husky": "^4.3.0",
+    "jest": "^26.5.0",
+    "nodemon": "^2.0.4",
+    "prettier": "^1.19.1",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.3"
+  }
+}
