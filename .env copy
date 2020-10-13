@@ -1,5 +1,0 @@
-EXPRESS_STATIC_FILES=/../../front/dist
-NODE_VERSION=latest
-NODE_CONTAINER_NAME=node_nailted_back
-CONTAINER_SERVICE_NAME=node_back
-NODE_PORT=3000

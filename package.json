@@ -61,6 +61,7 @@
     "passport-github": "^1.1.0",
     "passport-google-oauth2": "^0.2.0",
     "passport-slack": "0.0.7",
+    "passport-slack-oauth2": "^1.0.2",
     "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
