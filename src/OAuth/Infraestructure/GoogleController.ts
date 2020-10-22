@@ -14,30 +14,20 @@ export class GoogleController {
   @httpGet(
     '/callback',
     passport.authenticate(PROVIDER, PASSPORT_CONFIG),
-    (req: Request, res: Response, next: Function) => {
-      //console.log(req);
+    (request: Request, response: Response, next: Function) => {
       // @ts-ignore
-      req.session.user = req.user;
-      // @ts-ignore
-      //console.log(req.user);
-      res.redirect('good');
+      if (!request.user) {
+        response.sendStatus(401);
+      }
+
+      next();
     },
   )
-  public callback() {}
-
-  @httpGet('/good', (request: Request, response: Response, next: Function) => {
+  public callback(request: Request, response: Response, next: Function) {
     // @ts-ignore
-    //console.log(request);
+    console.log(request.user);
     // @ts-ignore
-    if (!request.session.passport.user) {
-      response.sendStatus(401);
-    }
-
-    next();
-  })
-  public hasOAuthUser(request: Request, response: Response) {
-    // @ts-ignore
-    const user = request.session.user;
+    const user = request.user;
     return response.send(
       `<pre>
             id: ${user._json.sub}
