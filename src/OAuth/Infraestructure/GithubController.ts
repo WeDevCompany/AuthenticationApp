@@ -2,13 +2,18 @@ import { controller, httpGet } from 'inversify-express-utils';
 import { Request, Response } from 'express';
 const passport = require('passport');
 require('./PassportConfig');
-const PROVIDER = 'Slack';
+const PROVIDER = 'github';
 const PASSPORT_CONFIG = {
-  scope: ['identity.basic', 'identity.email', 'identity.avatar', 'identity.team'],
+  scope: ['user:email'],
 };
 
-@controller('/oauth/slack')
-export class SlackController {
+@controller('/oauth/github')
+export class GithubController {
+  @httpGet('/')
+  public index(request: Request, response: Response, next: Function) {
+    return response.send("holaaaaaaaS");
+  }
+
   @httpGet(
     '/callback',
     passport.authenticate(PROVIDER, PASSPORT_CONFIG),

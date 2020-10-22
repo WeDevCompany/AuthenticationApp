@@ -63,6 +63,7 @@
     "inversify-logger-middleware": "^3.1.0",
     "passport": "^0.4.1",
     "passport-github": "^1.1.0",
+    "passport-github2": "^0.1.12",
     "passport-google-oauth2": "^0.2.0",
     "passport-slack": "0.0.7",
     "passport-slack-oauth2": "^1.0.2",

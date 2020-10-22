@@ -32,7 +32,7 @@ export class GoogleController {
             Email: ${user._json.email}
             Email verificado: ${user._json.email_verified}
             Localización: ${user._json.locale}
-            Proveedor: ${user.provider}
+            Proveedor: ${user.provider || PROVIDER}
             </pre><img alt="avatar" src="${user._json.picture}">`,
     );
   }
