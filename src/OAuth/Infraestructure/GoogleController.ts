@@ -25,8 +25,6 @@ export class GoogleController {
   )
   public callback(request: Request, response: Response, next: Function) {
     // @ts-ignore
-    console.log(request.user);
-    // @ts-ignore
     const user = request.user;
     return response.send(
       `<pre>
