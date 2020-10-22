@@ -1,13 +1,9 @@
 import { controller, httpGet } from 'inversify-express-utils';
-//import { inject } from 'inversify';
 import { Request, Response } from 'express';
 const passport = require('passport');
 require('./PassportConfig');
 const PROVIDER = 'google';
 const PASSPORT_CONFIG = { scope: ['profile', 'email'] };
-/*const PASSPORT_FAIL_REDIRECTION = {
-  failureRedirect: 'failed',
-};*/
 
 @controller('/oauth/google')
 export class GoogleController {
