@@ -1,11 +1,10 @@
+import { FactoryStrategy } from './FactoryStrategy';
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth2').Strategy;
 const SlackStrategy = require('passport-slack-oauth2').Strategy;
 const GitHubStrategy = require('passport-github2').Strategy;
 
-require('dotenv').config();
-
-passport.serializeUser(function (user, done) {
+passport.serializeUser(function(user, done) {
   /*
       From the user take just the id (to minimize the cookie size) and just pass the id of the user
       to the done callback
@@ -14,7 +13,7 @@ passport.serializeUser(function (user, done) {
   done(null, user);
 });
 
-passport.deserializeUser(function (user, done) {
+passport.deserializeUser(function(user, done) {
   /*
       Instead of user this function usually recives the id
       then you use the id to select the user from the db and pass the user obj to the done callback
@@ -30,7 +29,7 @@ passport.use(
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       passReqToCallback: true,
     },
-    function (request, accessToken, refreshToken, profile, done) {
+    function(request, accessToken, refreshToken, profile, done) {
       /*
      use the profile info (mainly profile id) to check if the user is registerd in ur db
      If yes select the user and pass him to the done callback
@@ -48,7 +47,7 @@ passport.use(
       clientSecret: process.env.SLACK_CLIENT_SECRET,
       skipUserProfile: false,
     },
-    function (accessToken, refreshToken, profile, done) {
+    function(accessToken, refreshToken, profile, done) {
       return done(null, profile);
     },
   ),
@@ -61,8 +60,11 @@ passport.use(
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
       skipUserProfile: false,
     },
-    function (accessToken, refreshToken, profile, done) {
+    function(accessToken, refreshToken, profile, done) {
       return done(null, profile);
     },
   ),
 );
+
+//passport.use(FactoryStrategy.getStrategy('Google'));
+//passport.use(FactoryStrategy.getStrategy('Slack'));

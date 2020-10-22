@@ -7,6 +7,7 @@ import { UserInMemoryRepository } from './OAuth/Infraestructure/UserInMemoryRepo
 import './ControllerRegistry';
 import passport = require('passport');
 const cookieSession = require('cookie-session');
+require('dotenv').config();
 
 // load everything needed to the Container
 let container = new Container();
