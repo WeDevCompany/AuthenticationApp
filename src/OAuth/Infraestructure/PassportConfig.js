@@ -2,7 +2,6 @@ import { FactoryStrategy } from './FactoryStrategy';
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth2').Strategy;
 const SlackStrategy = require('passport-slack-oauth2').Strategy;
-const GitHubStrategy = require('passport-github2').Strategy;
 
 passport.serializeUser(function(user, done) {
   /*
@@ -45,19 +44,6 @@ passport.use(
     {
       clientID: process.env.SLACK_CLIENT_ID,
       clientSecret: process.env.SLACK_CLIENT_SECRET,
-      skipUserProfile: false,
-    },
-    function(accessToken, refreshToken, profile, done) {
-      return done(null, profile);
-    },
-  ),
-);
-
-passport.use(
-  new GitHubStrategy(
-    {
-      clientID: process.env.GITHUB_CLIENT_ID,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET,
       skipUserProfile: false,
     },
     function(accessToken, refreshToken, profile, done) {
