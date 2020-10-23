@@ -4,6 +4,8 @@ const GoogleStrategy = require('passport-google-oauth2').Strategy;
 const SlackStrategy = require('passport-slack-oauth2').Strategy;
 const GitHubStrategy = require('passport-github2').Strategy;
 
+// TODO: create a new service to handle this behaviour
+
 passport.serializeUser(function (user, done) {
   /*
       From the user take just the id (to minimize the cookie size) and just pass the id of the user
