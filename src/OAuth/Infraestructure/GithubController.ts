@@ -9,11 +9,6 @@ const PASSPORT_CONFIG = {
 
 @controller('/oauth/github')
 export class GithubController {
-  @httpGet('/')
-  public index(request: Request, response: Response, next: Function) {
-    return response.send('holaaaaaaaS');
-  }
-
   @httpGet(
     '/callback',
     passport.authenticate(PROVIDER, PASSPORT_CONFIG),
@@ -27,17 +22,17 @@ export class GithubController {
   )
   public callback(request: Request, response: Response, next: Function) {
     // @ts-ignore
-    const user = request.user.user;
-    // @ts-ignore
-    const provider = request.user.provider;
+    const user = request.user;
     return response.send(
       `<pre>
-            id: ${user.id}
-            Nombre completo: ${user.name}
-            Foto: ${user.image_512}
-            Email: ${user.email}
-            Proveedor: ${provider || PROVIDER}
-            </pre><img alt="avatar" src="${user.image_512}">`,
+             id: ${user.id}
+             NodeId: ${user.nodeId}
+             Nombre completo: ${user.displayName}
+             User: ${user.username}
+             Foto: ${user.photos[0].value}
+             Email: ${user.emails[0].value}
+             Proveedor: ${user.provider || PROVIDER}
+             </pre><img alt="avatar" src="${user.photos[0].value}">`,
     );
   }
 }
