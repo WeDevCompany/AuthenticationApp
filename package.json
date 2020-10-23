@@ -23,7 +23,8 @@
     "start": "./node_modules/.bin/ts-node ./src/index.ts",
     "start:watch": "./node_modules/.bin/nodemon ./src/index.ts",
     "todo": "../scripts/todo.sh",
-    "todo:file": "../scripts/todo.sh > todo.md"
+    "todo:file": "../scripts/todo.sh > todo.md",
+    "generate_env_example": "./scripts/generate_env_example.sh"
   },
   "nodemonConfig": {
     "ignore": [
@@ -49,6 +50,8 @@
     "**/*.{jsx,js,md,ts,css,sass,less,yml,yaml,scss,json,vue}": [
       "npm run format",
       "npm run lint:fix",
+      "npm run todo:file",
+      "npm run generate_env_example",
       "git add ."
     ]
   },
