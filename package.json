@@ -22,8 +22,8 @@
     "docker:stop": "docker-compose stop",
     "start": "./node_modules/.bin/ts-node ./src/index.ts",
     "start:watch": "./node_modules/.bin/nodemon ./src/index.ts",
-    "todo": "../scripts/todo.sh",
-    "todo:file": "../scripts/todo.sh > todo.md",
+    "todo": "./scripts/todo.sh",
+    "todo:file": "./scripts/todo.sh > todo.md",
     "generate_env_example": "./scripts/generate_env_example.sh"
   },
   "nodemonConfig": {

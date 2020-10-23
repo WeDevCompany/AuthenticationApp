@@ -11,7 +11,7 @@ const PASSPORT_CONFIG = {
 export class GithubController {
   @httpGet('/')
   public index(request: Request, response: Response, next: Function) {
-    return response.send("holaaaaaaaS");
+    return response.send('holaaaaaaaS');
   }
 
   @httpGet(
