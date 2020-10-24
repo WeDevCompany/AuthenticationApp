@@ -1,0 +1,1 @@
+import './OAuth/Infraestructure/ControllerRegistry';

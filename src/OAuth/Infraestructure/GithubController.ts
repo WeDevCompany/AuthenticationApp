@@ -30,7 +30,7 @@ export class GithubController {
              Nombre completo: ${user.displayName}
              User: ${user.username}
              Foto: ${user.photos[0].value}
-             Email: ${user.emails[0].value}
+             Email: ${user.emails?.value}
              Proveedor: ${user.provider || PROVIDER}
              </pre><img alt="avatar" src="${user.photos[0].value}">`,
     );
