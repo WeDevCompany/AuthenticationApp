@@ -1,8 +1,6 @@
 import 'reflect-metadata';
 import { InversifyExpressServer } from 'inversify-express-utils';
-import { container } from './DependencyInjection';
-import './AppControllerRegistry';
-import { appMiddleware } from './AppMiddlewares';
+import { container, appMiddleware } from './Kernel';
 require('dotenv').config();
 
 const PORT = process.env.NODE_PORT || 3000;
