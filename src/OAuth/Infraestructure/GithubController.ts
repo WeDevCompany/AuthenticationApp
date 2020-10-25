@@ -23,6 +23,7 @@ export class GithubController {
   public callback(request: Request, response: Response, next: Function) {
     // @ts-ignore
     const user = request.user;
+    const email = user.emails ? user.emails[0].value : null;
     return response.send(
       `<pre>
              id: ${user.id}
@@ -30,7 +31,7 @@ export class GithubController {
              Nombre completo: ${user.displayName}
              User: ${user.username}
              Foto: ${user.photos[0].value}
-             Email: ${user.emails?.value}
+             Email: ${email}
              Proveedor: ${user.provider || PROVIDER}
              </pre><img alt="avatar" src="${user.photos[0].value}">`,
     );

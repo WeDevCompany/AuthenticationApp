@@ -1,41 +1,20 @@
 import 'reflect-metadata';
 import { InversifyExpressServer } from 'inversify-express-utils';
-import { Container } from 'inversify';
-import * as bodyParser from 'body-parser';
-import TYPES from './constant/types';
-import { UserInMemoryRepository } from './OAuth/Infraestructure/UserInMemoryRepository';
-import './ControllerRegistry';
-import passport = require('passport');
-const cookieSession = require('cookie-session');
+import { container } from './DependencyInjection';
+import './AppControllerRegistry';
+import { appMiddleware } from './AppMiddlewares';
 require('dotenv').config();
 
-// load everything needed to the Container
-let container = new Container();
-container.bind<UserInMemoryRepository>(TYPES.UserRepository).to(UserInMemoryRepository);
+const PORT = process.env.NODE_PORT || 3000;
 
-// start the server
+// start the server with the container
 let server = new InversifyExpressServer(container);
 
-server.setConfig(app => {
-  app.use(
-    bodyParser.urlencoded({
-      extended: true,
-    }),
-  );
-  app.use(bodyParser.json());
-  app.use(passport.initialize());
-  app.use(passport.session());
-  app.use(
-    cookieSession({
-      name: 'account-handler',
-      keys: ['key1', 'key2'],
-    }),
-  );
-});
+server.setConfig(appMiddleware);
 
 try {
   let serverInstance = server.build();
-  serverInstance.listen(3000);
+  serverInstance.listen(PORT);
 } catch (err) {
   console.error(err);
 }
