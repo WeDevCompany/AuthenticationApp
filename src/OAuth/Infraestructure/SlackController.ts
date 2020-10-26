@@ -1,7 +1,6 @@
 import { controller, httpGet } from 'inversify-express-utils';
 import { Request, Response } from 'express';
-const passport = require('passport');
-require('./PassportConfig');
+import { passport } from './PassportConfig';
 const PROVIDER = 'Slack';
 const PASSPORT_CONFIG = {
   scope: ['identity.basic', 'identity.email', 'identity.avatar', 'identity.team'],

@@ -1,13 +1,14 @@
 import { IStrategy } from '../Domain/IStrategy';
 const GooglePassportStrategy = require('passport-google-oauth2').Strategy;
 
+const CALLBACK_URL = '/oauth/google/callback';
 export class GoogleStrategy implements IStrategy {
   public getStrategy(): object {
     return new GooglePassportStrategy(
       {
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: 'http://localhost:3000/oauth/google/callback',
+        callbackURL: `${process.env.DOMAIN_URL}${CALLBACK_URL}`,
         passReqToCallback: true,
       },
       function(request, accessToken, refreshToken, profile, done) {
