@@ -1,6 +1,6 @@
 export class InvalidStrategyError extends Error {
   constructor(message: string) {
-    super(`InvalidUserError: ${message}`);
+    super(`InvalidStrategyError: ${message}`);
     Object.setPrototypeOf(this, InvalidStrategyError.prototype);
   }
 }

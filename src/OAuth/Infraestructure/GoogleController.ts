@@ -1,11 +1,18 @@
 import { controller, httpGet } from 'inversify-express-utils';
 import { Request, Response } from 'express';
 import { passport } from './PassportConfig';
+import { OAuthAutenticationService } from '../Domain/OauthAutenticationService';
 const PROVIDER = 'google';
 const PASSPORT_CONFIG = { scope: ['profile', 'email'] };
 
 @controller('/oauth/google')
 export class GoogleController {
+  private oauthService: OAuthAutenticationService;
+
+  constructor(oatuhService: OAuthAutenticationService) {
+    this.oatuhService = oatuhService;
+  }
+
   @httpGet(
     '/callback',
     passport.authenticate(PROVIDER, PASSPORT_CONFIG),

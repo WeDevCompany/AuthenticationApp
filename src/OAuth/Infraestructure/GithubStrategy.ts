@@ -1,7 +1,7 @@
-import { IStrategy } from '../Domain/IStrategy';
+import { Strategy } from '../Domain/Strategy';
 const GihubPassportStrategy = require('passport-github2').Strategy;
 
-export class GithubStrategy implements IStrategy {
+export class GithubStrategy implements Strategy {
   public getStrategy(): object {
     return new GihubPassportStrategy(
       {

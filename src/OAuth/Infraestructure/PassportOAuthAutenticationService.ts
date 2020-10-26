@@ -1,38 +1,32 @@
-class PassportOAuthAutenticationService {
-  /*switch (strategy) {
-    case 'Google': {
-      return new GoogleStrategy();
-    }
-    case 'Slack': {
-      return new SlackStrategy();
-    }
-    default: {
-      throw new InvalidStrategyError(`the strategy ${strategy} does not exist`);
-    }
-  }*/
-}
-
+import { InvalidOAuthMethod } from '../Domain/InvalidOAuthMethod';
+import { OAuthAutenticationService } from '../Domain/OauthAutenticationService';
 import { FactoryStrategy } from './FactoryStrategy';
 const passport = require('passport');
 
-passport.serializeUser(function(user, done) {
-  /*
-      From the user take just the id (to minimize the cookie size) and just pass the id of the user
-      to the done callback
-      PS: You dont have to do it like this its just usually done like this
-      */
-  done(null, user);
-});
+export class PassportOAuthAutenticationService implements OAuthAutenticationService {
+  constructor() {
+    passport.serializeUser(function(user, done) {
+      done(null, user);
+    });
 
-passport.deserializeUser(function(user, done) {
-  /*
-      Instead of user this function usually recives the id
-      then you use the id to select the user from the db and pass the user obj to the done callback
-      PS: You can later access this data in any routes in: req.user
-      */
-  done(null, user);
-});
-
-passport.use(FactoryStrategy('Github').getStrategy());
-passport.use(FactoryStrategy('Google').getStrategy());
-passport.use(FactoryStrategy('Slack').getStrategy());
+    passport.deserializeUser(function(user, done) {
+      done(null, user);
+    });
+  }
+  getAuthenticator(strategy: string): object {
+    switch (strategy) {
+      case 'Google': {
+        return passport.use(FactoryStrategy('Google').getStrategy());
+      }
+      case 'Github': {
+        return passport.use(FactoryStrategy('Github').getStrategy());
+      }
+      case 'Slack': {
+        return passport.use(FactoryStrategy('Slack').getStrategy());
+      }
+      default: {
+        throw new InvalidOAuthMethod(`the strategy ${strategy} does not exist`);
+      }
+    }
+  }
+}

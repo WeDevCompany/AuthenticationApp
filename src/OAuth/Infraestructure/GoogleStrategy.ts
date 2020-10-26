@@ -1,8 +1,8 @@
-import { IStrategy } from '../Domain/IStrategy';
+import { Strategy } from '../Domain/Strategy';
 const GooglePassportStrategy = require('passport-google-oauth2').Strategy;
 
 const CALLBACK_URL = '/oauth/google/callback';
-export class GoogleStrategy implements IStrategy {
+export class GoogleStrategy implements Strategy {
   public getStrategy(): object {
     return new GooglePassportStrategy(
       {

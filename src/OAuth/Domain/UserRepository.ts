@@ -1,9 +1,9 @@
-import { IUser } from './IUser';
+import { User } from './User';
 
 export interface UserRepository {
-  getUsers(): IUser[];
-  getUser(id: string): IUser;
-  newUser(user: IUser): IUser;
-  updateUser(id: string, user: IUser): IUser;
+  getUsers(): User[];
+  getUser(id: string): User;
+  newUser(user: User): User;
+  updateUser(id: string, user: User): User;
   deleteUser(id: string): string;
 }

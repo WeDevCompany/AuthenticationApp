@@ -1,10 +1,10 @@
 import { injectable } from 'inversify';
 import { UserRepository } from '../Domain/UserRepository';
-import { IUser } from '../Domain/IUser';
+import { User } from '../Domain/User';
 
 @injectable()
 export class UserInMemoryRepository implements UserRepository {
-  private userStorage: IUser[] = [
+  private userStorage: User[] = [
     {
       email: 'lorem@ipsum.com',
       name: 'Lorem',
@@ -15,12 +15,12 @@ export class UserInMemoryRepository implements UserRepository {
     },
   ];
 
-  public getUsers(): IUser[] {
+  public getUsers(): User[] {
     return this.userStorage;
   }
 
-  public getUser(id: string): IUser {
-    let result: IUser;
+  public getUser(id: string): User {
+    let result: User;
     this.userStorage.map(user => {
       if (user.name === id) {
         result = user;
@@ -30,12 +30,12 @@ export class UserInMemoryRepository implements UserRepository {
     return result;
   }
 
-  public newUser(user: IUser): IUser {
+  public newUser(user: User): User {
     this.userStorage.push(user);
     return user;
   }
 
-  public updateUser(id: string, user: IUser): IUser {
+  public updateUser(id: string, user: User): User {
     this.userStorage.map((entry, index) => {
       if (entry.name === id) {
         this.userStorage[index] = user;
@@ -46,7 +46,7 @@ export class UserInMemoryRepository implements UserRepository {
   }
 
   public deleteUser(id: string): string {
-    let updatedUser: IUser[] = [];
+    let updatedUser: User[] = [];
     this.userStorage.map(user => {
       if (user.name !== id) {
         updatedUser.push(user);

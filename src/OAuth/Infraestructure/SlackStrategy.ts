@@ -1,7 +1,7 @@
-import { IStrategy } from '../Domain/IStrategy';
+import { Strategy } from '../Domain/Strategy';
 const SlackPassportStrategy = require('passport-slack-oauth2').Strategy;
 
-export class SlackStrategy implements IStrategy {
+export class SlackStrategy implements Strategy {
   public getStrategy(): object {
     return new SlackPassportStrategy(
       {

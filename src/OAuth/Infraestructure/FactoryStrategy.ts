@@ -2,9 +2,9 @@ import { GoogleStrategy } from './GoogleStrategy';
 import { SlackStrategy } from './SlackStrategy';
 import { GithubStrategy } from './GithubStrategy';
 import { InvalidStrategyError } from '../Domain/InvalidStrategyError';
-import { IStrategy } from '../Domain/IStrategy';
+import { Strategy } from '../Domain/Strategy';
 
-function FactoryStrategy(strategy: String): IStrategy {
+function FactoryStrategy(strategy: String): Strategy {
   switch (strategy) {
     case 'Google': {
       return new GoogleStrategy();

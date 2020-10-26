@@ -1,1 +1,3 @@
-export interface OAuthAutenticationService {}
+export interface OAuthAutenticationService {
+  getAuthenticator(strategy: string): object;
+}
