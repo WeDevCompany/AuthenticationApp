@@ -7,7 +7,7 @@ import { PassportOAuthAutenticationService } from './OAuth/Infraestructure/Passp
 let container = new Container();
 container.bind<UserInMemoryRepository>(TYPES.UserRepository).to(UserInMemoryRepository);
 container
-  .bind<PassportOAuthAutenticationService>(TYPES.OauthAutenticationService)
+  .bind<PassportOAuthAutenticationService>(TYPES.OAuthAutenticationService)
   .to(PassportOAuthAutenticationService);
 
 export { container };

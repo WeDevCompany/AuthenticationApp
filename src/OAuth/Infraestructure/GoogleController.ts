@@ -1,17 +1,20 @@
 import { controller, httpGet } from 'inversify-express-utils';
 import { Request, Response } from 'express';
 import { passport } from './PassportConfig';
-// import { OAuthAutenticationService } from '../Domain/OauthAutenticationService';
+import { OAuthAutenticationService } from '../Domain/OauthAutenticationService';
+import { inject } from 'inversify';
+import TYPES from '../../constant/types';
 const PROVIDER = 'google';
 const PASSPORT_CONFIG = { scope: ['profile', 'email'] };
 
 @controller('/oauth/google')
 export class GoogleController {
-  // private oauthService: OAuthAutenticationService;
+  // @ts-ignore
+  private readonly oauthService: OAuthAutenticationService;
 
-  // constructor(oatuhService: OAuthAutenticationService) {
-  //   this.oatuhService = oatuhService;
-  // }
+  constructor(@inject(TYPES.OAuthAutenticationService) oauthService: OAuthAutenticationService) {
+    this.oauthService = oauthService;
+  }
 
   @httpGet(
     '/callback',
@@ -26,6 +29,7 @@ export class GoogleController {
     },
   )
   public callback(request: Request, response: Response, next: Function) {
+    console.log(request);
     // @ts-ignore
     const user = request.user;
     return response.send(

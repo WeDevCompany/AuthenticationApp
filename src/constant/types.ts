@@ -1,6 +1,6 @@
 const TYPES = {
   UserRepository: Symbol.for('UserInMemoryRepository'),
-  OauthAutenticationService: Symbol.for('PassportOAuthAutenticationService'),
+  OAuthAutenticationService: Symbol.for('PassportOAuthAutenticationService'),
 };
 
 export default TYPES;
