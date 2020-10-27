@@ -3,7 +3,7 @@ interface ValidUser {
   readonly displayName: string;
   readonly username: string;
   readonly image: string;
-  readonly email?: string;
+  readonly email: string;
 }
 
 export { ValidUser };
