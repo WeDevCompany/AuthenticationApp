@@ -11,12 +11,7 @@ function PassportOauthMiddleware(request: Request, response: Response, next: Nex
   const passport = oauthService.getAuthenticator('Google');
 
   // @ts-ignore
-  passport.authenticate('google', { scope: ['profile', 'email'] });
-  // @ts-ignore
-  console.log(
-    passport.authenticate('google', { scope: ['profile', 'email'] })(request, response, next),
-  );
-  //next();
+  passport.authenticate('google', { scope: ['profile', 'email'] })(request, response, next);
 }
 
 export { PassportOauthMiddleware };
