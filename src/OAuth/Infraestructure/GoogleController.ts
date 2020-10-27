@@ -4,6 +4,8 @@ import { inject } from 'inversify';
 import TYPES from '../../constant/types';
 import { container } from '../../DependencyInjection';
 import { Logger } from '../../Logger';
+import { UserDTO } from './UserDTO';
+import { CreateGoogleUser } from '../Application/CreateGoogleUser';
 
 const PROVIDER = 'google';
 const PASSPORT_CONFIG = { scope: ['profile', 'email'] };
@@ -19,7 +21,6 @@ export class GoogleController {
 
   @httpGet(
     '/callback',
-    //container.get<RequestHandler>(TYPES.OAuthAutenticationMiddleware),
     (request: Request, response: Response, next: NextFunction) => {
       // @ts-ignore
       request.provider = PROVIDER;
@@ -40,10 +41,22 @@ export class GoogleController {
     },
   )
   public callback(request: Request, response: Response, next: NextFunction) {
-    this.logger.log(request);
     // @ts-ignore
     const user = request.user;
-    return response.send(
+
+    const createGoogleUser = new CreateGoogleUser(this.logger);
+
+    const googleUser = new UserDTO({
+      id: user._json.sub,
+      displayName: user._json.name,
+      username: user._json.email,
+      image: user._json.picture,
+      email: user._json.email,
+    });
+
+    return createGoogleUser.execute(googleUser);
+
+    /*return response.send(
       `<pre>
             id: ${user._json.sub}
             Nombre completo:${user._json.name}
@@ -55,6 +68,6 @@ export class GoogleController {
             Localización: ${user._json.locale}
             Proveedor: ${user.provider || PROVIDER}
             </pre><img alt="avatar" src="${user._json.picture}">`,
-    );
+    );*/
   }
 }
