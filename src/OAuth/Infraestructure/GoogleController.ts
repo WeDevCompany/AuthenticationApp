@@ -1,26 +1,26 @@
 import { controller, httpGet } from 'inversify-express-utils';
 import { Request, Response, NextFunction, RequestHandler } from 'express';
-//import { passport } from './PassportConfig';
-import { OAuthAutenticationService } from '../Domain/OauthAutenticationService';
 import { inject } from 'inversify';
 import TYPES from '../../constant/types';
+import { container } from '../../DependencyInjection';
+import { Logger } from '../../Logger';
+
 const PROVIDER = 'google';
 const PASSPORT_CONFIG = { scope: ['profile', 'email'] };
-import { container } from '../../DependencyInjection';
 
 @controller('/oauth/google')
 export class GoogleController {
   // @ts-ignore
-  private readonly oauthService: OAuthAutenticationService;
+  private readonly logger: Logger;
 
-  constructor(@inject(TYPES.OAuthAutenticationService) oauthService: OAuthAutenticationService) {
-    this.oauthService = oauthService;
+  constructor(@inject(TYPES.Logger) logger: Logger) {
+    this.logger = logger;
   }
 
   @httpGet(
     '/callback',
     //container.get<RequestHandler>(TYPES.OAuthAutenticationMiddleware),
-    function(request: Request, response: Response, next: NextFunction) {
+    (request: Request, response: Response, next: NextFunction) => {
       // @ts-ignore
       request.provider = PROVIDER;
       // @ts-ignore
@@ -29,7 +29,6 @@ export class GoogleController {
       const oauthMiddleware = container.get<RequestHandler>(TYPES.OAuthAutenticationMiddleware);
       oauthMiddleware(request, response, next);
     },
-    //passport.authenticate(PROVIDER, PASSPORT_CONFIG),
     (request: Request, response: Response, next: NextFunction) => {
       // @ts-ignore
       if (!request.user) {
@@ -41,7 +40,7 @@ export class GoogleController {
     },
   )
   public callback(request: Request, response: Response, next: NextFunction) {
-    console.log(request);
+    this.logger.log(request);
     // @ts-ignore
     const user = request.user;
     return response.send(

@@ -7,3 +7,6 @@ git grep --heading --break --ignore-case -I --color=always -e '[1;31m FIX: [m*
 src/OAuth/Infraestructure/PassportConfig.ts
 //[1;31m TODO: [mDO NOT REMOVE methods need it for the passport js library
 //[1;31m TODO: [mDO NOT REMOVE methods need it for the passport js library
+
+src/OAuth/Infraestructure/PassportOauthMiddleware.ts
+  //[1;31m TODO: [mRefactor when the factory methods use the same name as the passport library

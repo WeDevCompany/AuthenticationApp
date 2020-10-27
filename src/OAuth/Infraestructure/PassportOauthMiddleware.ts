@@ -7,11 +7,12 @@ function PassportOauthMiddleware(request: Request, response: Response, next: Nex
   const oauthService = container.get<PassportOAuthAutenticationService>(
     TYPES.OAuthAutenticationService,
   );
-  //console.log(oauthService.getAuthenticator("Google"));
-  const passport = oauthService.getAuthenticator('Google');
+
+  // TODO: Refactor when the factory methods use the same name as the passport library
+  const authenticator = oauthService.getAuthenticator('Google');
 
   // @ts-ignore
-  passport.authenticate('google', { scope: ['profile', 'email'] })(request, response, next);
+  authenticator.authenticate(request.provider, request.provider_config)(request, response, next);
 }
 
 export { PassportOauthMiddleware };
