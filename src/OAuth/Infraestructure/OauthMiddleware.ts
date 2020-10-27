@@ -1,18 +1,17 @@
-import { NextFunction, Request, Response } from 'express';
 import TYPES from '../../constant/types';
 import { container } from '../../DependencyInjection';
 import { PassportOAuthAutenticationService } from './PassportOAuthAutenticationService';
 
-function PassportOauthMiddleware(request: Request, response: Response, next: NextFunction): any {
+function OauthMiddleware(provider, config) {
   const oauthService = container.get<PassportOAuthAutenticationService>(
     TYPES.OAuthAutenticationService,
   );
 
   // TODO: Refactor when the factory methods use the same name as the passport library
-  const authenticator = oauthService.getAuthenticator('Google');
+  const authenticator = oauthService.getAuthenticator(provider);
 
   // @ts-ignore
-  authenticator.authenticate(request.provider, request.provider_config)(request, response, next);
+  return authenticator.authenticate(provider, config);
 }
 
-export { PassportOauthMiddleware };
+export { OauthMiddleware };

@@ -1,10 +1,10 @@
 import { controller, httpGet } from 'inversify-express-utils';
-import { Request, Response, NextFunction, RequestHandler } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import { inject } from 'inversify';
 import TYPES from '../../constant/types';
-import { container } from '../../DependencyInjection';
 import { Logger } from '../../Logger';
 import { CreateGoogleUser } from '../Application/CreateGoogleUser';
+import { OauthMiddleware } from './OauthMiddleware';
 
 const PROVIDER = 'google';
 const PASSPORT_CONFIG = { scope: ['profile', 'email'] };
@@ -19,15 +19,7 @@ export class GoogleController {
 
   @httpGet(
     '/callback',
-    (request: Request, response: Response, next: NextFunction) => {
-      // @ts-ignore
-      request.provider = PROVIDER;
-      // @ts-ignore
-      request.provider_config = PASSPORT_CONFIG;
-      // @ts-ignore
-      const oauthMiddleware = container.get<RequestHandler>(TYPES.OAuthAutenticationMiddleware);
-      oauthMiddleware(request, response, next);
-    },
+    OauthMiddleware(PROVIDER, PASSPORT_CONFIG),
     (request: Request, response: Response, next: NextFunction) => {
       // @ts-ignore
       if (!request.user) {

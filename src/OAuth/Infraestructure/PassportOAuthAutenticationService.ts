@@ -1,5 +1,4 @@
 import { injectable } from 'inversify';
-import { InvalidOAuthMethod } from '../Domain/InvalidOAuthMethod';
 import { OAuthAutenticationService } from '../Domain/OauthAutenticationService';
 import { FactoryStrategy } from './FactoryStrategy';
 const passport = require('passport');
@@ -16,20 +15,6 @@ export class PassportOAuthAutenticationService implements OAuthAutenticationServ
     });
   }
   getAuthenticator(strategy: string): object {
-    switch (strategy) {
-      case 'Google': {
-        passport.use(FactoryStrategy('Google').getStrategy());
-        return passport;
-      }
-      case 'Github': {
-        return passport.use(FactoryStrategy('Github').getStrategy());
-      }
-      case 'Slack': {
-        return passport.use(FactoryStrategy('Slack').getStrategy());
-      }
-      default: {
-        throw new InvalidOAuthMethod(`the strategy ${strategy} does not exist`);
-      }
-    }
+    return passport.use(FactoryStrategy(strategy).getStrategy());
   }
 }

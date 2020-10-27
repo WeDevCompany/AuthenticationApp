@@ -5,18 +5,19 @@ import { InvalidStrategyError } from '../Domain/InvalidStrategyError';
 import { Strategy } from '../Domain/Strategy';
 
 function FactoryStrategy(strategy: String): Strategy {
-  switch (strategy) {
-    case 'Google': {
+  const strategyLowerCase = strategy.toLowerCase();
+  switch (strategyLowerCase) {
+    case 'google': {
       return new GoogleStrategy();
     }
-    case 'Slack': {
+    case 'slack': {
       return new SlackStrategy();
     }
-    case 'Github': {
+    case 'github': {
       return new GithubStrategy();
     }
     default: {
-      throw new InvalidStrategyError(`the strategy ${strategy} does not exist`);
+      throw new InvalidStrategyError(`the strategy ${strategyLowerCase} does not exist`);
     }
   }
 }
