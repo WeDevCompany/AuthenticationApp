@@ -21,10 +21,11 @@
     "docker:watch": "npm run docker:start && npm run docker:logs",
     "docker:stop": "docker-compose stop",
     "docker:down": "docker-compose down -v",
+    "docker:test-watch": "./scripts/test.sh",
     "start": "./node_modules/.bin/ts-node ./src/index.ts",
     "start:watch": "./node_modules/.bin/nodemon ./src/index.ts",
     "todo": "./scripts/todo.sh",
-    "scripts:permissions": "sudo chmod +x ./scripts/* && ls -la ./scripts",
+    "scripts:permissions": "sudo chmod +x ./scripts/* && ls -la ./scripts  && sudo chown -R $USER:$USER data",
     "scripts:generate_session_tokens": "./scripts/generate_session_token.sh",
     "todo:file": "./scripts/todo.sh > todo.md",
     "generate_env_example": "./scripts/generate_env_example.sh"
@@ -83,6 +84,7 @@
     "lint-staged": "^10.4.2",
     "nodemon": "^2.0.4",
     "prettier": "^1.19.1",
+    "ts-jest": "^26.4.3",
     "ts-node": "^9.0.0",
     "typescript": "^4.0.3"
   }
