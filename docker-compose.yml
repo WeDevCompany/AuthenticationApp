@@ -14,3 +14,20 @@ services:
     environment:
       - PORT=${NODE_PORT}
     command: sh -c "npm install && npm audit fix --force && npm run start:watch"
+  mysql:
+    image: mysql:${MYSQL_VERSION}
+    container_name: ${MYSQL_HOST}
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    env_file:
+      - '.env'
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DB}
+      - MYSQL_ROOT_USER=${MYSQL_USER}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWD}
+      - MYSQL_USER=${MYSQL_USER_DEV}
+      - MYSQL_PASSWORD=${MYSQL_PASSWD_DEV}
+    ports:
+      - '${MYSQL_PORT}:${MYSQL_PORT}'
+    volumes:
+      - './data/db/mysql:/var/lib/mysql'

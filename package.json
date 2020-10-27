@@ -20,6 +20,7 @@
     "docker:logs": "docker-compose logs -f",
     "docker:watch": "npm run docker:start && npm run docker:logs",
     "docker:stop": "docker-compose stop",
+    "docker:down": "docker-compose down -v",
     "start": "./node_modules/.bin/ts-node ./src/index.ts",
     "start:watch": "./node_modules/.bin/nodemon ./src/index.ts",
     "todo": "./scripts/todo.sh",
