@@ -18,7 +18,8 @@ export class PassportOAuthAutenticationService implements OAuthAutenticationServ
   getAuthenticator(strategy: string): object {
     switch (strategy) {
       case 'Google': {
-        return passport.use(FactoryStrategy('Google').getStrategy());
+        passport.use(FactoryStrategy('Google').getStrategy());
+        return passport;
       }
       case 'Github': {
         return passport.use(FactoryStrategy('Github').getStrategy());

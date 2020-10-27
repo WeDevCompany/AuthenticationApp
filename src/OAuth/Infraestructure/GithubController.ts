@@ -1,5 +1,5 @@
 import { controller, httpGet } from 'inversify-express-utils';
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import { passport } from './PassportConfig';
 const PROVIDER = 'github';
 const PASSPORT_CONFIG = {
@@ -11,7 +11,7 @@ export class GithubController {
   @httpGet(
     '/callback',
     passport.authenticate(PROVIDER, PASSPORT_CONFIG),
-    (request: Request, response: Response, next: Function) => {
+    (request: Request, response: Response, next: NextFunction) => {
       // @ts-ignore
       if (!request.user) {
         response.sendStatus(401);
@@ -19,7 +19,7 @@ export class GithubController {
       next();
     },
   )
-  public callback(request: Request, response: Response, next: Function) {
+  public callback(request: Request, response: Response, next: NextFunction) {
     // @ts-ignore
     const user = request.user;
     const email = user.emails ? user.emails[0].value : null;
