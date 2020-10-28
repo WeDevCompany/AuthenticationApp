@@ -2,6 +2,7 @@ import { StringAttribute } from './StringAttribute';
 import { InvalidEmailError } from './InvalidEmailError';
 
 export class Email extends StringAttribute {
+  // TODO: Change regex to take in consideration the need for the top domain after the point
   private readonly VALID_EMAIL_REGEX: RegExp = new RegExp(
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/gm,
   );

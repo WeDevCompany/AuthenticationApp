@@ -4,6 +4,9 @@ package.json
 scripts/todo.sh
 git grep --heading --break --ignore-case -I --color=always -e '[1;31m FIX: [m*' -e '[1;31m TODO: [m*' | sed 's/\\s\\{3,\\}/  /g'
 
+src/OAuth/Domain/Email.ts
+  //[1;31m TODO: [mChange regex to take in consideration the need for the top domain after the point
+
 src/OAuth/Domain/User.ts
     //[1;31m TODO: [mRefactor it should be able to handle multiple errors
 
