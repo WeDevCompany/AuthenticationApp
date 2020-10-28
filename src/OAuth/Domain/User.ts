@@ -1,8 +1,7 @@
-import { ValidUserData } from './ValidUserData';
+import { Image } from './Image';
 import { Name } from './Name';
 import { Id } from './Id';
 import { Email } from './Email';
-
 import { InvalidUserError } from './InvalidUserError';
 import { ValidUser } from './ValidUser';
 import { UserName } from './UsesrName';
@@ -11,7 +10,7 @@ export class User {
   _id: Id;
   _displayName: Name;
   _username: UserName;
-  _image: string;
+  _image: Image;
   _email: Email;
 
   constructor(user: ValidUser) {
@@ -61,6 +60,14 @@ export class User {
 
   set email(email: string) {
     this._email = new Email(email);
+  }
+
+  get image(): string {
+    return this._image.value;
+  }
+
+  set image(image: string) {
+    this._image = new Image(image);
   }
 
   equals(user: ValidUser): boolean {
