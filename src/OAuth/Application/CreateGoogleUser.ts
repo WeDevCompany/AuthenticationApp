@@ -2,6 +2,7 @@ import { inject } from 'inversify';
 import TYPES from '../../constant/types';
 import { InputService } from '../../InputService';
 import { Logger } from '../../Logger';
+import { User } from '../Domain/User';
 
 export class CreateGoogleUser implements InputService {
   protected readonly logger: Logger;
@@ -13,7 +14,7 @@ export class CreateGoogleUser implements InputService {
   //@ts-ignore
   async execute(googleUser: ValidUser): any {
     try {
-      this.logger.log(googleUser);
+      this.logger.log(new User(googleUser));
       return { status: 'success' };
     } catch (err) {
       this.logger.error(err);

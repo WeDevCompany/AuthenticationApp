@@ -25,7 +25,7 @@
     "start": "./node_modules/.bin/ts-node ./src/index.ts",
     "start:watch": "./node_modules/.bin/nodemon ./src/index.ts",
     "todo": "./scripts/todo.sh",
-    "scripts:permissions": "sudo chmod +x ./scripts/* && ls -la ./scripts  && sudo chown -R $USER:$USER data",
+    "scripts:permissions": "sudo chmod +x ./scripts/* && ls -la ./scripts  && sudo chown -R $USER:$USER data && sudo chown -R $USER:$USER coverage",
     "scripts:generate_session_tokens": "./scripts/generate_session_token.sh",
     "todo:file": "./scripts/todo.sh > todo.md",
     "generate_env_example": "./scripts/generate_env_example.sh"
