@@ -4,7 +4,7 @@ import { GithubStrategy } from './GithubStrategy';
 import { InvalidStrategyError } from '../Domain/InvalidStrategyError';
 import { Strategy } from '../Domain/Strategy';
 
-function FactoryStrategy(strategy: String): Strategy {
+function FactoryStrategy(strategy: string): Strategy {
   const strategyLowerCase = strategy.toLowerCase();
   switch (strategyLowerCase) {
     case 'google': {

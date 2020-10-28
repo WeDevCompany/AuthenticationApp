@@ -1,6 +1,7 @@
 import { SerializationService } from '../Domain/SerializationService';
 const passport = require('passport');
 
+// TODO: It have a meaningful purpose if it's not injected on the PassportOAuthAutenticationService
 export class PassportSerializationService implements SerializationService {
   public serializeUser(): object {
     return passport.serializeUser(function(user, done) {
