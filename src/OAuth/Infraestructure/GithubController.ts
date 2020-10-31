@@ -1,6 +1,6 @@
 import { controller, httpGet } from 'inversify-express-utils';
 import { Request, Response, NextFunction } from 'express';
-import { passport } from './PassportConfig';
+import { OauthMiddleware } from './OauthMiddleware';
 const PROVIDER = 'github';
 const PASSPORT_CONFIG = {
   scope: ['user:email'],
@@ -10,7 +10,7 @@ const PASSPORT_CONFIG = {
 export class GithubController {
   @httpGet(
     '/callback',
-    passport.authenticate(PROVIDER, PASSPORT_CONFIG),
+    OauthMiddleware(PROVIDER, PASSPORT_CONFIG),
     (request: Request, response: Response, next: NextFunction) => {
       // @ts-ignore
       if (!request.user) {

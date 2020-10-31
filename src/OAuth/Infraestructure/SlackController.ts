@@ -1,6 +1,10 @@
 import { controller, httpGet } from 'inversify-express-utils';
 import { Request, Response, NextFunction } from 'express';
-import { passport } from './PassportConfig';
+import { OauthMiddleware } from './OauthMiddleware';
+import { CreateSlackUser } from '../Application/CreateSlackUser';
+import { Logger } from '../../Logger';
+import { inject } from 'inversify';
+import TYPES from '../../constant/types';
 const PROVIDER = 'Slack';
 const PASSPORT_CONFIG = {
   scope: ['identity.basic', 'identity.email', 'identity.avatar', 'identity.team'],
@@ -8,9 +12,15 @@ const PASSPORT_CONFIG = {
 
 @controller('/oauth/slack')
 export class SlackController {
+  private readonly logger: Logger;
+
+  constructor(@inject(TYPES.Logger) logger: Logger) {
+    this.logger = logger;
+  }
+
   @httpGet(
     '/callback',
-    passport.authenticate(PROVIDER, PASSPORT_CONFIG),
+    OauthMiddleware(PROVIDER, PASSPORT_CONFIG),
     (request: Request, response: Response, next: NextFunction) => {
       // @ts-ignore
       if (!request.user) {
@@ -22,16 +32,15 @@ export class SlackController {
   public callback(request: Request, response: Response, next: NextFunction) {
     // @ts-ignore
     const user = request.user.user;
-    // @ts-ignore
-    const provider = request.user.provider;
-    return response.send(
-      `<pre>
-            id: ${user.id}
-            Nombre completo: ${user.name}
-            Foto: ${user.image_512}
-            Email: ${user.email}
-            Proveedor: ${provider || PROVIDER}
-            </pre><img alt="avatar" src="${user.image_512}">`,
-    );
+
+    const createSlackUser = new CreateSlackUser(this.logger);
+
+    return createSlackUser.execute({
+      id: user.id,
+      displayName: user.name,
+      username: user.name,
+      image: user.image_512,
+      email: user.email,
+    });
   }
 }
