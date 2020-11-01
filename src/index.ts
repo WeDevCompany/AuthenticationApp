@@ -1,8 +1,9 @@
 import 'reflect-metadata';
 import { InversifyExpressServer } from 'inversify-express-utils';
-import { container, appMiddleware } from './Kernel';
+import { container, appMiddleware, connection } from './Kernel';
 require('dotenv').config();
 
+console.log(connection);
 const PORT = process.env.NODE_PORT || 3000;
 
 // start the server with the container
