@@ -5,7 +5,6 @@ export class To extends StringAttribute {
 
   constructor(to: string) {
     super();
-    this.throwErrorIfEmptyAttribute(to, 'The attribute id can not be empty');
     this.value = to;
   }
 
