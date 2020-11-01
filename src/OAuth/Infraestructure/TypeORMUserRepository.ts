@@ -1,5 +1,5 @@
 import { Connection, createConnection } from 'typeorm';
-import { connection } from '../../../ormconfig';
+import { DatabaseConnectionConfiguration } from '../../../ormconfig';
 import { UserRepository } from '../Domain/UserRepository';
 
 class TypeORMUserRepository implements UserRepository {
@@ -12,7 +12,7 @@ class TypeORMUserRepository implements UserRepository {
   private databaseConnection: Promise<Connection>;
 
   constructor() {
-    this.databaseConnection = createConnection(JSON.stringify(connection));
+    this.databaseConnection = createConnection(DatabaseConnectionConfiguration);
     this.databaseConnection.then(connection => console.log('dwedd', connection));
   }
 }

@@ -1,7 +1,12 @@
-const connection = {
-  type: process.env.ORM_TYPE_OF_DB,
+import { ConnectionOptions } from 'typeorm';
+
+const port: number = Number.parseInt(process.env.MYSQL_PORT);
+
+const DatabaseConnectionConfiguration: ConnectionOptions = {
+  name: process.env.MYSQL_HOST,
+  type: 'mysql',
   host: process.env.MYSQL_HOST,
-  port: process.env.MYSQL_PORT,
+  port: port,
   username: process.env.MYSQL_USER,
   password: process.env.MYSQL_PASSWD,
   database: process.env.MYSQL_DB,
@@ -17,4 +22,4 @@ const connection = {
   },
 };
 
-export { connection };
+export { DatabaseConnectionConfiguration };
