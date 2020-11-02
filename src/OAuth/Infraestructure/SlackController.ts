@@ -1,3 +1,4 @@
+import { UserRepository } from './../Domain/UserRepository';
 import { controller, httpGet } from 'inversify-express-utils';
 import { Request, Response, NextFunction } from 'express';
 import { OauthMiddleware } from './OauthMiddleware';
@@ -13,9 +14,14 @@ const PASSPORT_CONFIG = {
 @controller('/oauth/slack')
 export class SlackController {
   private readonly logger: Logger;
+  private readonly repo: UserRepository;
 
-  constructor(@inject(TYPES.Logger) logger: Logger) {
+  constructor(
+    @inject(TYPES.UserRepository) repo: UserRepository,
+    @inject(TYPES.Logger) logger: Logger,
+  ) {
     this.logger = logger;
+    this.repo = repo;
   }
 
   @httpGet(
@@ -33,7 +39,7 @@ export class SlackController {
     // @ts-ignore
     const user = request.user.user;
 
-    const createSlackUser = new CreateSlackUser(this.logger);
+    const createSlackUser = new CreateSlackUser(this.repo, this.logger);
 
     return createSlackUser.execute({
       id: user.id,
@@ -41,6 +47,7 @@ export class SlackController {
       username: user.name,
       image: user.image_512,
       email: user.email,
+      provider: PROVIDER,
     });
   }
 }

@@ -1,3 +1,4 @@
+import { UserRepository } from './../Domain/UserRepository';
 import { controller, httpGet } from 'inversify-express-utils';
 import { Request, Response, NextFunction } from 'express';
 import { OauthMiddleware } from './OauthMiddleware';
@@ -13,9 +14,14 @@ const PASSPORT_CONFIG = {
 @controller('/oauth/github')
 export class GithubController {
   private readonly logger: Logger;
+  private readonly repo: UserRepository;
 
-  constructor(@inject(TYPES.Logger) logger: Logger) {
+  constructor(
+    @inject(TYPES.UserRepository) repo: UserRepository,
+    @inject(TYPES.Logger) logger: Logger,
+  ) {
     this.logger = logger;
+    this.repo = repo;
   }
 
   @httpGet(
@@ -33,7 +39,7 @@ export class GithubController {
     // @ts-ignore
     const user = request.user;
 
-    const createGithubUser = new CreateGithubUser(this.logger);
+    const createGithubUser = new CreateGithubUser(this.repo, this.logger);
 
     const email = user.emails ? user.emails[0].value : null;
     const displayName = user.displayName ? user.displayName : user.username;
@@ -44,6 +50,7 @@ export class GithubController {
       username: user.username,
       image: user.photos[0].value,
       email: email,
+      provider: PROVIDER,
     });
   }
 }
