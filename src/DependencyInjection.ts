@@ -1,6 +1,5 @@
 import { Container } from 'inversify';
 import TYPES from './constant/types';
-//import { OldUserInMemoryRepository } from './OAuth/Infraestructure/OldUserInMemoryRepository';
 import { PassportOAuthAutenticationService } from './OAuth/Infraestructure/PassportOAuthAutenticationService';
 import { ConsoleLogger } from './OAuth/Infraestructure/ConsoleLogger';
 import { TypeORMUserRepository } from './OAuth/Infraestructure/TypeORMUserRepository';

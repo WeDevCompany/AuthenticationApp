@@ -10,15 +10,18 @@ class ConsoleLogger implements Logger {
   }
 
   log(message: object): any {
-    this.console.log(message);
+    const cssLog = 'background-color: #444; color: green; font-wight: bold';
+    this.console.log(`%c ${message}`, cssLog);
   }
 
   error(message: object): any {
-    this.console.error(message);
+    const cssError = 'background-color: #444; color: red; font-wight: bold';
+    this.console.error(`%c ${message}`, cssError);
   }
 
   warn(message: object): any {
-    this.console.warn(message);
+    const cssWarn = 'background-color: #444; color: yellow; font-wight: bold';
+    this.console.warn(`%c ${message}`, cssWarn);
   }
 }
 

@@ -8,10 +8,11 @@ import { injectable } from 'inversify';
 @injectable()
 class TypeORMUserRepository implements UserRepository {
   private databaseConnection: Connection;
+  readonly defaultDatabaseConnectionName = 'default';
 
   constructor() {
     this.databaseConnection = getConnectionManager().get(
-      DatabaseConnectionConfiguration.name || 'default',
+      DatabaseConnectionConfiguration.name || this.defaultDatabaseConnectionName,
     );
   }
 
