@@ -30,7 +30,16 @@ class TypeORMUserRepository implements UserRepository {
   }
 
   async deleteUser(id: string) {
-    throw new Error('Method not implemented.');
+    const ORMRepo = await this.databaseConnection.getRepository(UserORM);
+    const user = await ORMRepo.findOne({ where: { id: id } });
+    user.deleteAt = Date.now().toString();
+    await ORMRepo.save(user);
+  }
+
+  async findUserByID(id: string) {
+    const ORMRepo = await this.databaseConnection.getRepository(UserORM);
+    const user = await ORMRepo.findOne({ where: { id: id, deleteAt: undefined } });
+    return user;
   }
 }
 

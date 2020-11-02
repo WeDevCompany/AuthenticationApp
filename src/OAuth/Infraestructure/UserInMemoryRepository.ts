@@ -21,4 +21,8 @@ export class UserInMemoryRepository implements UserRepository {
     this.userStorage = updatedUser;
     return id;
   }
+
+  findUserByID(id: string) {
+    throw new Error('Method not implemented.');
+  }
 }

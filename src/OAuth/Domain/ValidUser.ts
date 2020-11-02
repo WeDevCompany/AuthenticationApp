@@ -4,6 +4,7 @@ interface ValidUser {
   readonly username: string;
   readonly image: string;
   readonly email: string;
+  readonly provider: string;
 }
 
 export { ValidUser };

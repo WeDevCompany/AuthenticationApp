@@ -48,6 +48,7 @@ export class GoogleController {
       username: user._json.email,
       image: user._json.picture,
       email: user._json.email,
+      provider: PROVIDER,
     });
   }
 }

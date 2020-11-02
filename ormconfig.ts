@@ -12,6 +12,7 @@ const DatabaseConnectionConfiguration: ConnectionOptions = {
   database: process.env.MYSQL_DB,
   synchronize: true,
   logging: true,
+  logger: 'file',
   entities: [__dirname + '/**/*.entity.ts'],
   migrations: [__dirname + '/**/*.migration.ts'],
   subscribers: [__dirname + '/**/*.subscriber.ts'],

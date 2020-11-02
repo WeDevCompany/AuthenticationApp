@@ -7,6 +7,9 @@ class UserORM {
   @Column() username: string;
   @Column() image: string;
   @Column() email: string;
+  @Column() provider: string;
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' }) createAt: string;
+  @Column({ type: 'timestamp' }) deleteAt: string;
 }
 
 export { UserORM };
