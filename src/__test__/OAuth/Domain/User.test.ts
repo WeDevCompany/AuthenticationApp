@@ -100,7 +100,7 @@ const USER_JSON: ValidUser = {
   provider: 'GOOGLE',
 };
 
-describe('It should validate the data the gets from the csv file', () => {
+describe('It should create users with the correct data', () => {
   it('should create a valid User', () => {
     VALID_USER_DATA.forEach(user => {
       expect(new User(user).equals(user)).toBe(true);
