@@ -8,6 +8,7 @@ const DATA = [
     username: '@Cox',
     email: 'DellaDCox@superrito.com',
     image: 'https://unsplash.com/photos/6uneKLGrJPs',
+    provider: 'GOOGLE',
   },
   {
     id: '2',
@@ -15,6 +16,7 @@ const DATA = [
     username: '@lsdkfjlksjdf',
     email: 'DellaDCox@superrito.com',
     image: 'https://unsplash.com/photos/6uneKLGrJPs',
+    provider: 'GOOGLE',
   },
   {
     id: '3',
@@ -22,6 +24,7 @@ const DATA = [
     username: '@sdfsdf',
     email: 'DellaDCox@superrito.com',
     image: 'https://unsplash.com/photos/6uneKLGrJPs',
+    provider: 'GOOGLE',
   },
 ];
 
@@ -34,6 +37,7 @@ const INVALID_DATA = [
     username: '@lsdkfjlksjdf',
     email: 'DellaDCox@superrito.com',
     image: 'https://unsplash.com/photos/6uneKLGrJPs',
+    provider: 'GOOGLE',
   },
   {
     id: '2',
@@ -41,6 +45,7 @@ const INVALID_DATA = [
     username: '@lsdkfjlksjdf',
     email: 'DellaDCox@superrito.com',
     image: 'https://unsplash.com/photos/6uneKLGrJPs',
+    provider: 'GOOGLE',
   },
   {
     id: '3',
@@ -48,6 +53,7 @@ const INVALID_DATA = [
     username: '',
     email: 'DellaDCox@superrito.com',
     image: 'https://unsplash.com/photos/6uneKLGrJPs',
+    provider: 'GOOGLE',
   },
   {
     id: '4',
@@ -55,6 +61,7 @@ const INVALID_DATA = [
     username: '@lsdkfjlksjdf',
     email: '@superrito.com',
     image: 'https://unsplash.com/photos/6uneKLGrJPs',
+    provider: 'GOOGLE',
   },
   {
     id: '5',
@@ -62,6 +69,7 @@ const INVALID_DATA = [
     username: '@lsdkfjlksjdf',
     email: 'DellaDCox@superrito.com',
     image: '',
+    provider: 'GOOGLE',
   },
   {
     id: '6',
@@ -69,6 +77,15 @@ const INVALID_DATA = [
     username: '@lsdkfjlksjdf',
     email: 'DellaDCox@superrito.com',
     image: 'fakeurl.com',
+    provider: 'GOOGLE',
+  },
+  {
+    id: '7',
+    displayName: 'ksjdfh kasjdfh ',
+    username: '@lsdkfjlksjdf',
+    email: 'DellaDCox@superrito.com',
+    image: 'fakeurl.com',
+    provider: '',
   },
 ];
 
@@ -80,6 +97,7 @@ const USER_JSON: ValidUser = {
   username: '@Cox',
   email: 'DellaDCox@superrito.com',
   image: 'https://unsplash.com/photos/6uneKLGrJPs',
+  provider: 'GOOGLE',
 };
 
 describe('It should validate the data the gets from the csv file', () => {
@@ -97,6 +115,7 @@ describe('It should validate the data the gets from the csv file', () => {
         username: '@Cox',
         email: 'DellaDCox@superrito.com',
         image: 'https://unsplash.com/photos/6uneKLGrJPs',
+        provider: 'GOOGLE',
       }).equals(USER_JSON),
     ).toBe(true);
   });

@@ -11,6 +11,7 @@ const USERS_DATA: ValidUser[] = [
     username: 'Cox',
     image: 'https://goole.com',
     email: 'DellaDCox@superrito.com',
+    provider: 'GOOGLE',
   },
   {
     id: 'sdfsdf',
@@ -18,6 +19,7 @@ const USERS_DATA: ValidUser[] = [
     username: 'dsfgff',
     image: 'https://twitter.com',
     email: 'Denn@dsfgff.com',
+    provider: 'GOOGLE',
   },
 ];
 describe('It should validate the CreateGoogleUser application service', () => {
@@ -34,10 +36,10 @@ describe('It should validate the CreateGoogleUser application service', () => {
   });
 
   /*it('should create a new user with valid data', async () => {
-        const spy = jest.spyOn(FakeWrite, 'write');
-        USERS_DATA.forEach(user => {
-            repository.create(user);
-            expect(spy).toHaveBeenCalled();
-        });
-    });*/
+          const spy = jest.spyOn(FakeWrite, 'write');
+          USERS_DATA.forEach(user => {
+              repository.create(user);
+              expect(spy).toHaveBeenCalled();
+          });
+      });*/
 });

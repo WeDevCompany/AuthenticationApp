@@ -16,6 +16,10 @@ class FakeUserRepository implements UserRepository {
   async deleteUser(id: string) {
     return true;
   }
+
+  findUserByID(id: string) {
+    return true;
+  }
 }
 
 export { FakeUserRepository };

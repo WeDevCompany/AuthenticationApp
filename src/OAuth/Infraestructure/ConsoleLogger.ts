@@ -1,5 +1,6 @@
 import { injectable } from 'inversify';
 import { Logger } from '../../Logger';
+import 'reflect-metadata';
 
 @injectable()
 class ConsoleLogger implements Logger {
