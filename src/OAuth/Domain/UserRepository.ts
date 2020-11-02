@@ -1,6 +1,6 @@
 import { User } from './User';
 
 export interface UserRepository {
-  createuser(User): any;
+  createUser(user: User): any;
   deleteUser(id: string): any;
 }

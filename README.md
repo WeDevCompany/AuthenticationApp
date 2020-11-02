@@ -15,3 +15,20 @@
 - [ ] Permitir borrar una cuaneta ya existente
 - [ ] Crear fron con el listado de tus cuentas
 - [ ] Permitir restingir las notificaciones
+
+# ORM insert
+
+```
+await this.databaseConnection
+    .createQueryBuilder()
+    .insert()
+    .into(UserORM)
+    .values({
+    id: user.id,
+    displayName: user.displayName,
+    username: user.username,
+    image: user.image,
+    email: user.email
+    })
+    .execute();
+```

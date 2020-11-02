@@ -1,5 +1,5 @@
 const TYPES = {
-  UserRepository: Symbol.for('UserInMemoryRepository'),
+  UserRepository: Symbol.for('TypeORMUserRepository'),
   OAuthAutenticationService: Symbol.for('PassportOAuthAutenticationService'),
   Logger: Symbol.for('ConsoleLogger'),
 };

@@ -6,7 +6,7 @@ import { User } from '../Domain/User';
 export class UserInMemoryRepository implements UserRepository {
   private userStorage: User[] = [];
 
-  createuser(user: User) {
+  createUser(user: User) {
     this.userStorage.push(user);
   }
 

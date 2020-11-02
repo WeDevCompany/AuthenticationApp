@@ -5,6 +5,7 @@ import TYPES from '../../constant/types';
 import { Logger } from '../../Logger';
 import { CreateGoogleUser } from '../Application/CreateGoogleUser';
 import { OauthMiddleware } from './OauthMiddleware';
+import { UserRepository } from '../Domain/UserRepository';
 
 const PROVIDER = 'google';
 const PASSPORT_CONFIG = { scope: ['profile', 'email'] };
@@ -12,9 +13,14 @@ const PASSPORT_CONFIG = { scope: ['profile', 'email'] };
 @controller('/oauth/google')
 export class GoogleController {
   private readonly logger: Logger;
+  private readonly repo: UserRepository;
 
-  constructor(@inject(TYPES.Logger) logger: Logger) {
+  constructor(
+    @inject(TYPES.UserRepository) repo: UserRepository,
+    @inject(TYPES.Logger) logger: Logger,
+  ) {
     this.logger = logger;
+    this.repo = repo;
   }
 
   @httpGet(
@@ -34,7 +40,7 @@ export class GoogleController {
     // @ts-ignore
     const user = request.user;
 
-    const createGoogleUser = new CreateGoogleUser(this.logger);
+    const createGoogleUser = new CreateGoogleUser(this.repo, this.logger);
 
     return createGoogleUser.execute({
       id: user._json.sub,
