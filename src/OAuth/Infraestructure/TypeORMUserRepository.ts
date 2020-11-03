@@ -42,6 +42,12 @@ class TypeORMUserRepository implements UserRepository {
     const user = await ORMRepo.findOne({ where: { id: id, deleteAt: undefined } });
     return user;
   }
+
+  async findUserByEmail(email: string) {
+    const ORMRepo = await this.databaseConnection.getRepository(UserORM);
+    const user = await ORMRepo.findOne({ where: { email: email } });
+    return user;
+  }
 }
 
 export { TypeORMUserRepository };

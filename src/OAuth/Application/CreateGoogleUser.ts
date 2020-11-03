@@ -20,6 +20,13 @@ export class CreateGoogleUser implements InputService {
   //@ts-ignore
   async execute(googleUser: ValidUser): any {
     try {
+      const repoPromise = this.repo.findUserByEmail(googleUser.email);
+      const user = await repoPromise.then(userdata => userdata);
+      if (!user) {
+        this.logger.log(`Usuario no encontrado`);
+        // TODO crear y lanzar excepcion
+      }
+      this.logger.log(`Usuario encontrado: ${JSON.stringify(user)}`);
       this.logger.log(`Intentando almacenar ${JSON.stringify(googleUser)}`);
       this.repo.createUser(new User(googleUser));
       return { status: 'success' };

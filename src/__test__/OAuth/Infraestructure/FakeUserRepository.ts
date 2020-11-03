@@ -20,6 +20,10 @@ class FakeUserRepository implements UserRepository {
   findUserByID(id: string) {
     return true;
   }
+
+  findUserByEmail(email: string) {
+    throw new Error('Method not implemented.');
+  }
 }
 
 export { FakeUserRepository };
