@@ -6,8 +6,9 @@ import { Logger } from '../../Logger';
 import { inject } from 'inversify';
 import TYPES from '../../constant/types';
 import { CreateGithubUser } from '../Application/CreateGithubUser';
-const PROVIDER = 'github';
-const PASSPORT_CONFIG = {
+import PROVIDER from '../../constant/providers';
+const OAUTH_PROVIDER = 'github';
+const OAUTH_CONFIG = {
   scope: ['user:email'],
 };
 
@@ -26,7 +27,7 @@ export class GithubController {
 
   @httpGet(
     '/callback',
-    OauthMiddleware(PROVIDER, PASSPORT_CONFIG),
+    OauthMiddleware(OAUTH_PROVIDER, OAUTH_CONFIG),
     (request: Request, response: Response, next: NextFunction) => {
       // @ts-ignore
       if (!request.user) {
@@ -50,7 +51,7 @@ export class GithubController {
       username: user.username,
       image: user.photos[0].value,
       email: email,
-      provider: PROVIDER,
+      provider: PROVIDER.GITHUB,
     });
   }
 }

@@ -6,8 +6,9 @@ import { CreateSlackUser } from '../Application/CreateSlackUser';
 import { Logger } from '../../Logger';
 import { inject } from 'inversify';
 import TYPES from '../../constant/types';
-const PROVIDER = 'Slack';
-const PASSPORT_CONFIG = {
+import PROVIDER from '../../constant/providers';
+const OAUTH_PROVIDER = 'Slack';
+const OAUTH_CONFIG = {
   scope: ['identity.basic', 'identity.email', 'identity.avatar', 'identity.team'],
 };
 
@@ -26,7 +27,7 @@ export class SlackController {
 
   @httpGet(
     '/callback',
-    OauthMiddleware(PROVIDER, PASSPORT_CONFIG),
+    OauthMiddleware(OAUTH_PROVIDER, OAUTH_CONFIG),
     (request: Request, response: Response, next: NextFunction) => {
       // @ts-ignore
       if (!request.user) {
@@ -47,7 +48,7 @@ export class SlackController {
       username: user.name,
       image: user.image_512,
       email: user.email,
-      provider: PROVIDER,
+      provider: PROVIDER.SLACK,
     });
   }
 }

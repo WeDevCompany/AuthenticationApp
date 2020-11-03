@@ -6,9 +6,10 @@ import { Logger } from '../../Logger';
 import { CreateGoogleUser } from '../Application/CreateGoogleUser';
 import { OauthMiddleware } from './OauthMiddleware';
 import { UserRepository } from '../Domain/UserRepository';
+import PROVIDER from '../../constant/providers';
 
-const PROVIDER = 'google';
-const PASSPORT_CONFIG = { scope: ['profile', 'email'] };
+const OAUTH_PROVIDER = 'google';
+const OAUTH_CONFIG = { scope: ['profile', 'email'] };
 
 @controller('/oauth/google')
 export class GoogleController {
@@ -25,7 +26,7 @@ export class GoogleController {
 
   @httpGet(
     '/callback',
-    OauthMiddleware(PROVIDER, PASSPORT_CONFIG),
+    OauthMiddleware(OAUTH_PROVIDER, OAUTH_CONFIG),
     (request: Request, response: Response, next: NextFunction) => {
       // @ts-ignore
       if (!request.user) {
@@ -48,7 +49,7 @@ export class GoogleController {
       username: user._json.email,
       image: user._json.picture,
       email: user._json.email,
-      provider: PROVIDER,
+      provider: PROVIDER.GOOGLE,
     });
   }
 }
