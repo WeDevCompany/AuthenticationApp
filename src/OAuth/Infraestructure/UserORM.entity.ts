@@ -9,7 +9,7 @@ class UserORM {
   @Column() email: string;
   @Column() provider: string;
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' }) createAt: string;
-  @Column({ type: 'timestamp' }) deleteAt: string;
+  @Column({ type: 'timestamp', nullable: true }) deleteAt: string;
 }
 
 export { UserORM };

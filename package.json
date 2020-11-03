@@ -26,11 +26,12 @@
     "docker:test-watch": "./scripts/test-watch.sh",
     "docker:test": "./scripts/test.sh",
     "docker:typorm": "./scripts/typeorm.sh $@",
+    "db:reset": "./scripts/db_reset.sh",
     "start": "ts-node src/index.ts",
     "start:watch": "./node_modules/.bin/nodemon ./src/index.ts",
     "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js",
     "todo": "./scripts/todo.sh",
-    "scripts:permissions": "sudo chmod +x ./scripts/* && ls -la ./scripts  && sudo chown -R $USER:$USER data && sudo chown -R $USER:$USER coverage",
+    "scripts:permissions": "sudo chmod +x ./scripts/* || true && ls -la ./scripts  && sudo chown -R $USER:$USER data || true && sudo chown -R $USER:$USER coverage || true",
     "scripts:generate_session_tokens": "./scripts/generate_session_token.sh",
     "todo:file": "./scripts/todo.sh > todo.md",
     "generate_env_example": "./scripts/generate_env_example.sh"

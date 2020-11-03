@@ -25,6 +25,7 @@ class TypeORMUserRepository implements UserRepository {
         username: user.username,
         image: user.image,
         email: user.email,
+        provider: user.provider,
       }),
     );
   }
