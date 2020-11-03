@@ -53,7 +53,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
-      "commit-msg": "npx hge-commit && commitlint -E HUSKY_GIT_PARAMS"
+      "commit-msg": " ./node_modules/.bin/commitlint -E HUSKY_GIT_PARAMS && npx hge-commit"
     }
   },
   "lint-staged": {
