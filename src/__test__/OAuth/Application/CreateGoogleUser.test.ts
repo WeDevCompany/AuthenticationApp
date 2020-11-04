@@ -3,6 +3,7 @@ import { FakeUserRepository } from '../Infraestructure/FakeUserRepository';
 import { UserRepository } from '../../../OAuth/Domain/UserRepository';
 import { ValidUser } from '../../../OAuth/Domain/ValidUser';
 import { User } from '../../../OAuth/Domain/User';
+import PROVIDER from '../../../constant/providers';
 
 const USERS_DATA: ValidUser[] = [
   {
@@ -11,7 +12,7 @@ const USERS_DATA: ValidUser[] = [
     username: 'Cox',
     image: 'https://goole.com',
     email: 'DellaDCox@superrito.com',
-    provider: 'GOOGLE',
+    provider: PROVIDER.GOOGLE,
   },
   {
     id: 'sdfsdf',
@@ -19,27 +20,19 @@ const USERS_DATA: ValidUser[] = [
     username: 'dsfgff',
     image: 'https://twitter.com',
     email: 'Denn@dsfgff.com',
-    provider: 'GOOGLE',
+    provider: PROVIDER.GOOGLE,
   },
 ];
-describe('It should validate the CreateGoogleUser application service', () => {
+describe('[UNIT] - CreateGoogleUser application service', () => {
   let repository: UserRepository;
   beforeAll(() => {
     const logger = new ConsoleLogger();
     repository = new FakeUserRepository(logger);
   });
 
-  it('should getAll data from the repository', async () => {
+  it('It should call the repository to create a new user', () => {
     USERS_DATA.forEach(async user => {
       expect(await repository.createUser(new User(user))).toBe(true);
     });
   });
-
-  /*it('should create a new user with valid data', async () => {
-          const spy = jest.spyOn(FakeWrite, 'write');
-          USERS_DATA.forEach(user => {
-              repository.create(user);
-              expect(spy).toHaveBeenCalled();
-          });
-      });*/
 });

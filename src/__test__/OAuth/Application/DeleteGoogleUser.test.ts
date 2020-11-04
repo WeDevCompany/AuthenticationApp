@@ -4,14 +4,14 @@ import { UserRepository } from '../../../OAuth/Domain/UserRepository';
 
 const USER_ID = '16389273667';
 
-describe('It should validate the DeleteUser application service', () => {
+describe('[UNIT] - DeleteUser application service tests', () => {
   let repository: UserRepository;
   beforeAll(() => {
     const logger = new ConsoleLogger();
     repository = new FakeUserRepository(logger);
   });
 
-  it('should getAll data from the repository', async () => {
+  it('DeleteUser application service should call the respository', async () => {
     expect(await repository.deleteUser(USER_ID)).toBe(true);
   });
 });

@@ -22,7 +22,7 @@ class FakeUserRepository implements UserRepository {
   }
 
   findUserByEmail(email: string) {
-    throw new Error('Method not implemented.');
+    return true;
   }
 }
 

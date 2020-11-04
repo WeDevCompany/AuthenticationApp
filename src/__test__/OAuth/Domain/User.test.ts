@@ -1,3 +1,4 @@
+import PROVIDER from '../../../constant/providers';
 import { User } from '../../../OAuth/Domain/User';
 import { ValidUser } from '../../../OAuth/Domain/ValidUser';
 
@@ -8,7 +9,7 @@ const DATA = [
     username: '@Cox',
     email: 'DellaDCox@superrito.com',
     image: 'https://unsplash.com/photos/6uneKLGrJPs',
-    provider: 'GOOGLE',
+    provider: PROVIDER.GOOGLE,
   },
   {
     id: '2',
@@ -16,7 +17,7 @@ const DATA = [
     username: '@lsdkfjlksjdf',
     email: 'DellaDCox@superrito.com',
     image: 'https://unsplash.com/photos/6uneKLGrJPs',
-    provider: 'GOOGLE',
+    provider: PROVIDER.GITHUB,
   },
   {
     id: '3',
@@ -24,7 +25,7 @@ const DATA = [
     username: '@sdfsdf',
     email: 'DellaDCox@superrito.com',
     image: 'https://unsplash.com/photos/6uneKLGrJPs',
-    provider: 'GOOGLE',
+    provider: PROVIDER.SLACK,
   },
 ];
 
@@ -37,7 +38,7 @@ const INVALID_DATA = [
     username: '@lsdkfjlksjdf',
     email: 'DellaDCox@superrito.com',
     image: 'https://unsplash.com/photos/6uneKLGrJPs',
-    provider: 'GOOGLE',
+    provider: 'google',
   },
   {
     id: '2',
@@ -45,7 +46,7 @@ const INVALID_DATA = [
     username: '@lsdkfjlksjdf',
     email: 'DellaDCox@superrito.com',
     image: 'https://unsplash.com/photos/6uneKLGrJPs',
-    provider: 'GOOGLE',
+    provider: 'google',
   },
   {
     id: '3',
@@ -53,7 +54,7 @@ const INVALID_DATA = [
     username: '',
     email: 'DellaDCox@superrito.com',
     image: 'https://unsplash.com/photos/6uneKLGrJPs',
-    provider: 'GOOGLE',
+    provider: 'google',
   },
   {
     id: '4',
@@ -61,7 +62,7 @@ const INVALID_DATA = [
     username: '@lsdkfjlksjdf',
     email: '@superrito.com',
     image: 'https://unsplash.com/photos/6uneKLGrJPs',
-    provider: 'GOOGLE',
+    provider: 'google',
   },
   {
     id: '5',
@@ -69,7 +70,7 @@ const INVALID_DATA = [
     username: '@lsdkfjlksjdf',
     email: 'DellaDCox@superrito.com',
     image: '',
-    provider: 'GOOGLE',
+    provider: 'google',
   },
   {
     id: '6',
@@ -97,7 +98,7 @@ const USER_JSON: ValidUser = {
   username: '@Cox',
   email: 'DellaDCox@superrito.com',
   image: 'https://unsplash.com/photos/6uneKLGrJPs',
-  provider: 'GOOGLE',
+  provider: 'google',
 };
 
 describe('It should create users with the correct data', () => {
@@ -115,7 +116,7 @@ describe('It should create users with the correct data', () => {
         username: '@Cox',
         email: 'DellaDCox@superrito.com',
         image: 'https://unsplash.com/photos/6uneKLGrJPs',
-        provider: 'GOOGLE',
+        provider: PROVIDER.GOOGLE,
       }).equals(USER_JSON),
     ).toBe(true);
   });
