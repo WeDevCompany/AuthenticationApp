@@ -19,7 +19,6 @@
 # ORM insert
 
 ```
-console.log('test');
 await this.databaseConnection
     .createQueryBuilder()
     .insert()
