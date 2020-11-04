@@ -4,10 +4,10 @@ CONTAINER_ID=$(grep -w MYSQL_HOST .env | cut -d '=' -f2)
 
 echo "✋ Stoping containers"
 echo "============================"
-docker-compose stop
+npm run docker:down
 echo "🗑 Erasing data"
 echo "============================"
 sudo rm -rf ./data
 echo "👍 Starting containers"
 echo "============================"
-docker-compose start
+npm run docker:watch

@@ -28,8 +28,8 @@ export class CreateGoogleUser implements InputService {
       }
       this.logger.log(`Usuario encontrado: ${JSON.stringify(user)}`);
       this.logger.log(`Intentando almacenar ${JSON.stringify(googleUser)}`);
-      this.repo.createUser(new User(googleUser));
-      return { status: 'success' };
+      await this.repo.createUser(new User(googleUser));
+      return { success: 'true' };
     } catch (err) {
       this.logger.error(err);
       throw err;

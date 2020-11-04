@@ -37,19 +37,23 @@ export class GoogleController {
       next();
     },
   )
-  public callback(request: Request, response: Response, next: NextFunction) {
+  public async callback(request: Request, response: Response, next: NextFunction) {
     // @ts-ignore
     const user = request.user;
 
     const createGoogleUser = new CreateGoogleUser(this.repo, this.logger);
-
-    return createGoogleUser.execute({
-      id: user._json.sub,
-      displayName: user._json.name,
-      username: user._json.email,
-      image: user._json.picture,
-      email: user._json.email,
-      provider: PROVIDER.GOOGLE,
-    });
+    try {
+      return await createGoogleUser.execute({
+        id: user._json.sub,
+        displayName: user._json.name,
+        username: user._json.email,
+        image: user._json.picture,
+        email: user._json.email,
+        provider: PROVIDER.GOOGLE,
+      });
+    } catch (error) {
+      this.logger.error(error);
+      response.sendStatus(500);
+    }
   }
 }
