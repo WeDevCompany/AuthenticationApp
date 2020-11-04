@@ -8,9 +8,14 @@ export class Provider extends StringAttribute {
 
   constructor(provider: string) {
     super();
-    this.throwErrorIfEmptyAttribute(provider, this.EMPTY_ERROR_MESSAGE);
-    this.throwErrorIfInvaliProvider(provider);
-    this.value = provider;
+    const cleanProvider = this.cleanProvider(provider);
+    this.throwErrorIfEmptyAttribute(cleanProvider, this.EMPTY_ERROR_MESSAGE);
+    this.throwErrorIfInvaliProvider(cleanProvider);
+    this.value = cleanProvider;
+  }
+
+  cleanProvider(provider: string): string {
+    return provider.trim().toLowerCase();
   }
 
   throwErrorIfInvaliProvider(provider: string): void {
