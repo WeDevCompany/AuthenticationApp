@@ -23,4 +23,25 @@ const DatabaseConnectionConfiguration: ConnectionOptions = {
   },
 };
 
-export { DatabaseConnectionConfiguration };
+const DatabaseConnectionTestConfiguration: ConnectionOptions = {
+  name: process.env.MYSQL_DB_TEST,
+  type: 'mysql',
+  host: process.env.MYSQL_HOST,
+  port: port,
+  username: process.env.MYSQL_USER,
+  password: process.env.MYSQL_PASSWD,
+  database: process.env.MYSQL_DB,
+  synchronize: true,
+  logging: true,
+  logger: 'file',
+  entities: [__dirname + '/**/*.entity.ts'],
+  migrations: [__dirname + '/**/*.migration.ts'],
+  subscribers: [__dirname + '/**/*.subscriber.ts'],
+  cli: {
+    entitiesDir: 'src/entity',
+    migrationsDir: 'src/migration',
+    subscribersDir: 'src/subscriber',
+  },
+};
+
+export { DatabaseConnectionConfiguration, DatabaseConnectionTestConfiguration };

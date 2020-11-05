@@ -23,6 +23,7 @@ services:
       - '.env'
     environment:
       - MYSQL_DATABASE=${MYSQL_DB}
+      - MYSQL_DATABASE_TEST=${MYSQL_DB}
       - MYSQL_ROOT_USER=${MYSQL_USER}
       - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWD}
       - MYSQL_USER=${MYSQL_USER_DEV}
@@ -31,3 +32,4 @@ services:
       - '${MYSQL_PORT}:${MYSQL_PORT}'
     volumes:
       - './data/db/mysql:/var/lib/mysql'
+      - ./sql:/docker-entrypoint-initdb.d

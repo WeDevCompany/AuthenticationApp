@@ -1,6 +1,4 @@
 #!/bin/sh
-# Getting .env values to use on the script
-CONTAINER_ID=$(grep -w MYSQL_HOST .env | cut -d '=' -f2)
 
 echo "✋ Stoping containers"
 echo "============================"
