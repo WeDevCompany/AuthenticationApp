@@ -18,7 +18,7 @@
     "test-staged": "./node_modules/.bin/jest  --verbose --coverage --updateSnapshot --notify --findRelatedTests",
     "release": "standard-version",
     "lint-staged": "./node_modules/.bin/lint-staged",
-    "docker:start": "./scripts/init.sh && docker-compose up -d && npm run db:generate-database-script",
+    "docker:start": "./scripts/init.sh && npm run db:generate-database-script && docker-compose up -d --build",
     "docker:logs": "docker-compose logs -f",
     "docker:watch": "npm run docker:start && npm run docker:logs",
     "docker:stop": "docker-compose stop",

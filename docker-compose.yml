@@ -32,4 +32,4 @@ services:
       - '${MYSQL_PORT}:${MYSQL_PORT}'
     volumes:
       - './data/db/mysql:/var/lib/mysql'
-      - ./sql:/docker-entrypoint-initdb.d
+      - ${SQL_DUMP}:/docker-entrypoint-initdb.d

@@ -11,7 +11,7 @@ class TypeORMUserRepository implements UserRepository {
   private databaseConnection: Connection;
   readonly defaultDatabaseConnectionName = 'default';
 
-  constructor(@inject(TYPES.Connection) databaseConnection: Connection) {
+  constructor(@inject(TYPES.Connection) databaseConnection: ConnectionOptions) {
     this.databaseConnection = getConnectionManager().get(
       databaseConnection.name || this.defaultDatabaseConnectionName,
     );

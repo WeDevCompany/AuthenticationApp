@@ -1,4 +1,5 @@
 import { createConnection } from 'typeorm';
-import { DatabaseConnectionConfiguration } from '../ormconfig';
+import { DatabaseConnectionConfiguration, DatabaseConnectionTestConfiguration } from '../ormconfig';
 const DatabaseConnection = createConnection(DatabaseConnectionConfiguration);
-export { DatabaseConnection };
+const DatabaseConnectionTest = createConnection(DatabaseConnectionTestConfiguration);
+export { DatabaseConnection, DatabaseConnectionTest };

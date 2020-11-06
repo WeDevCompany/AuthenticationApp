@@ -30,7 +30,7 @@ const DatabaseConnectionTestConfiguration: ConnectionOptions = {
   port: port,
   username: process.env.MYSQL_USER,
   password: process.env.MYSQL_PASSWD,
-  database: process.env.MYSQL_DB,
+  database: process.env.MYSQL_DB_TEST,
   synchronize: true,
   logging: true,
   logger: 'file',
