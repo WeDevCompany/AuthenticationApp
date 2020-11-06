@@ -1,18 +1,19 @@
 import { User } from './../Domain/User';
 import { Connection, getConnectionManager } from 'typeorm';
-import { DatabaseConnectionConfiguration } from '../../../ormconfig';
 import { UserRepository } from '../Domain/UserRepository';
 import { UserORM } from './UserORM.entity';
 import { injectable } from 'inversify';
+import { inject } from 'inversify';
+import TYPES from '../../constant/types';
 
 @injectable()
 class TypeORMUserRepository implements UserRepository {
   private databaseConnection: Connection;
   readonly defaultDatabaseConnectionName = 'default';
 
-  constructor() {
+  constructor(@inject(TYPES.Connection) databaseConnection: Connection) {
     this.databaseConnection = getConnectionManager().get(
-      DatabaseConnectionConfiguration.name || this.defaultDatabaseConnectionName,
+      databaseConnection.name || this.defaultDatabaseConnectionName,
     );
   }
 
