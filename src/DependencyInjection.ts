@@ -14,7 +14,7 @@ container
   .to(PassportOAuthAutenticationService);
 container.bind<ConsoleLogger>(TYPES.Logger).to(ConsoleLogger);
 container
-  .bind<ConnectionOptions>(TYPES.Connection)
+  .bind<ConnectionOptions>(TYPES.ConnectionOptions)
   .toConstantValue(DatabaseConnectionConfiguration);
 
 export { container };
