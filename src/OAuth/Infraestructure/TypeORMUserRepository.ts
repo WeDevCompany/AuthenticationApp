@@ -1,5 +1,5 @@
 import { User } from './../Domain/User';
-import { Connection, ConnectionOptions, getConnectionManager } from 'typeorm';
+import { Connection, getConnectionManager, IsNull, ConnectionOptions } from 'typeorm';
 import { UserRepository } from '../Domain/UserRepository';
 import { UserORM } from './UserORM.entity';
 import { injectable } from 'inversify';
@@ -40,13 +40,13 @@ class TypeORMUserRepository implements UserRepository {
 
   async findUserByID(id: string) {
     const ORMRepo = await this.databaseConnection.getRepository(UserORM);
-    const user = await ORMRepo.findOne({ where: { id: id, deleteAt: undefined } });
+    const user = await ORMRepo.findOne({ where: { id: id, deleteAt: IsNull() } });
     return user;
   }
 
   async findUserByEmail(email: string) {
     const ORMRepo = await this.databaseConnection.getRepository(UserORM);
-    const user = await ORMRepo.findOne({ where: { email: email } });
+    const user = await ORMRepo.find({ where: { email: email, deleteAt: IsNull() } });
     return user;
   }
 }

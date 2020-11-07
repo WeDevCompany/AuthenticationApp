@@ -32,3 +32,10 @@ await this.databaseConnection
     })
     .execute();
 ```
+
+# Generate UUID for cookies
+
+```
+sudo apt-get install uuid-runtime
+Random UUID generated with uuidgen -r
+```

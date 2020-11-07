@@ -9,3 +9,4 @@ data/
 coverage/
 dump/
 ormlogs.log
+.firebase_oauth
