@@ -107,6 +107,7 @@
     "standard-version": "^9.0.0",
     "ts-jest": "^26.4.3",
     "ts-node": "3.3.0",
+    "typeorm-test-transactions": "^1.14.1",
     "typescript": "^3.9.7"
   },
   "config": {

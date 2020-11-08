@@ -12,6 +12,7 @@ class TypeORMUserRepository implements UserRepository {
   readonly defaultDatabaseConnectionName = 'default';
 
   constructor(@inject(TYPES.ConnectionOptions) databaseConnection: ConnectionOptions) {
+    console.log(getConnectionManager());
     this.databaseConnection = getConnectionManager().get(
       databaseConnection.name || this.defaultDatabaseConnectionName,
     );
@@ -19,16 +20,7 @@ class TypeORMUserRepository implements UserRepository {
 
   async createUser(user: User) {
     const ORMRepo = await this.databaseConnection.getRepository(UserORM);
-    await ORMRepo.save(
-      ORMRepo.create({
-        id: user.id,
-        displayName: user.displayName,
-        username: user.username,
-        image: user.image,
-        email: user.email,
-        provider: user.provider,
-      }),
-    );
+    await ORMRepo.save(ORMRepo.create(this.domainUserToOrmUserData(user)));
   }
 
   async deleteUser(id: string) {
@@ -38,16 +30,31 @@ class TypeORMUserRepository implements UserRepository {
     await ORMRepo.save(user);
   }
 
-  async findUserByID(id: string) {
+  async findUserByID(id: string): Promise<User> {
     const ORMRepo = await this.databaseConnection.getRepository(UserORM);
     const user = await ORMRepo.findOne({ where: { id: id, deleteAt: IsNull() } });
-    return user;
+    return this.ormUserToDomainUser(user);
   }
 
   async findUserByEmail(email: string) {
     const ORMRepo = await this.databaseConnection.getRepository(UserORM);
     const user = await ORMRepo.find({ where: { email: email, deleteAt: IsNull() } });
     return user;
+  }
+
+  ormUserToDomainUser(user: UserORM): User {
+    return new User(user);
+  }
+
+  domainUserToOrmUserData(user: User): object {
+    return {
+      id: user.id,
+      displayName: user.displayName,
+      username: user.username,
+      image: user.image,
+      email: user.email,
+      provider: user.provider,
+    };
   }
 }
 
