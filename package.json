@@ -25,6 +25,7 @@
     "docker:down": "docker-compose down -v",
     "docker:test-watch": "./scripts/test-watch.sh",
     "docker:test": "./scripts/test.sh",
+    "docker:test-staged": "./scripts/test-staged.sh",
     "docker:typorm": "./scripts/typeorm.sh $@",
     "db:reset": "./scripts/db_reset.sh",
     "db:create-database": "./scripts/create_db_mysql.sh",
@@ -66,7 +67,7 @@
       "npm run format",
       "npm run lint:fix",
       "npm run todo:file",
-      "npm run test-staged",
+      "npm run docker:test-staged",
       "npm run generate_env_example",
       "git add ."
     ]
@@ -107,7 +108,6 @@
     "standard-version": "^9.0.0",
     "ts-jest": "^26.4.3",
     "ts-node": "3.3.0",
-    "typeorm-test-transactions": "^1.14.1",
     "typescript": "^3.9.7"
   },
   "config": {

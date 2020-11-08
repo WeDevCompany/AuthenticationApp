@@ -1,3 +1,4 @@
+require('dotenv').config();
 import { ConnectionOptions } from 'typeorm';
 
 const port: number = Number.parseInt(process.env.MYSQL_PORT);
@@ -13,9 +14,9 @@ const DatabaseConnectionConfiguration: ConnectionOptions = {
   synchronize: true,
   logging: true,
   logger: 'file',
-  entities: [__dirname + 'src/**/*.entity.ts'],
-  migrations: [__dirname + 'src/**/*.migration.ts'],
-  subscribers: [__dirname + 'src/**/*.subscriber.ts'],
+  entities: [__dirname + '/**/*.entity.ts'],
+  migrations: [__dirname + '/**/*.migration.ts'],
+  subscribers: [__dirname + '/**/*.subscriber.ts'],
   cli: {
     entitiesDir: 'src/entity',
     migrationsDir: 'src/migration',
@@ -34,9 +35,9 @@ const DatabaseConnectionTestConfiguration: ConnectionOptions = {
   synchronize: true,
   logging: true,
   logger: 'file',
-  entities: [__dirname + 'src/**/*.entity.ts'],
-  migrations: [__dirname + 'src/**/*.migration.ts'],
-  subscribers: [__dirname + 'src/**/*.subscriber.ts'],
+  entities: [__dirname + '/**/*.entity.ts'],
+  migrations: [__dirname + '/**/*.migration.ts'],
+  subscribers: [__dirname + '/**/*.subscriber.ts'],
   cli: {
     entitiesDir: 'src/entity',
     migrationsDir: 'src/migration',

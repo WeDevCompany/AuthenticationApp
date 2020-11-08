@@ -1,9 +1,11 @@
+import 'reflect-metadata';
 import { createConnection, getConnection } from 'typeorm';
 import { DatabaseConnectionTestConfiguration } from '../ormconfig';
 
 const DatabaseTestingConnection = {
   async create() {
-    await createConnection(DatabaseConnectionTestConfiguration.name);
+    const connection = createConnection(DatabaseConnectionTestConfiguration);
+    return connection;
   },
 
   async close() {
@@ -11,7 +13,7 @@ const DatabaseTestingConnection = {
   },
 
   async clear() {
-    const connection = getConnection();
+    const connection = getConnection(DatabaseConnectionTestConfiguration.name);
     const entities = connection.entityMetadatas;
 
     entities.forEach(async entity => {
@@ -20,4 +22,5 @@ const DatabaseTestingConnection = {
     });
   },
 };
+
 export default DatabaseTestingConnection;
