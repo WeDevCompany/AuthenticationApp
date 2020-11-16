@@ -59,11 +59,11 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
-      "commit-msg": " ./node_modules/.bin/commitlint -E HUSKY_GIT_PARAMS && npx hge-commit"
+      "commit-msg": "npx hge-commit"
     }
   },
   "lint-staged": {
-    "**/*.{jsx,js,md,ts,css,sass,less,scss,vue}": [
+    "**/*.{jsx,js,ts,css,sass,less,scss,vue}": [
       "npm run format",
       "npm run lint:fix",
       "npm run todo:file",
