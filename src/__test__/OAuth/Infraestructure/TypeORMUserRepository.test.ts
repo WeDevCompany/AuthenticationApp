@@ -46,5 +46,24 @@ describe('Feature1Test', () => {
       },
       TIMEOUT_FOR_SLOW_TEST,
     );
+    it(
+      'should delete a user',
+      async () => {
+        const userToInsert: User = new User({
+          id: '2',
+          displayName: 'Antonio',
+          username: '@Chj',
+          email: 'AntonioChj@superrito.com',
+          image: 'https://unsplash.com/photos/6uneKLGrJPs',
+          provider: PROVIDER.GOOGLE,
+        });
+        await repo.createUser(userToInsert);
+        await repo.deleteUser(userToInsert.id);
+        const userFromDb: User = await repo.findUserByID(userToInsert.id);
+        console.log(userFromDb);
+        expect(await userFromDb.equals(userToInsert)).toBe(true);
+      },
+      TIMEOUT_FOR_SLOW_TEST,
+    );
   });
 });
