@@ -10,3 +10,4 @@ coverage/
 dump/
 ormlogs.log
 .firebase_oauth
+*.temp.txt
