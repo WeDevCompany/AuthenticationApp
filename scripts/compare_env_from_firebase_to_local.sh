@@ -11,7 +11,7 @@ MD5_ENV=$(sed 's/=.*//' .env | sed -e '/^[ \t]*#/d' | sed '/^[[:space:]]*$/d' | 
 if [ "$FIREBASE_MD5_ENV" = "$MD5_ENV" ]
 then
     echo "firebase and .env have the same content"
-    return 0
+    exit 0
 fi
 
 echo "The content of the .env does not correspond to that of firebase"
