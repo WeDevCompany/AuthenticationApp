@@ -3,6 +3,7 @@ services:
   node_authentication:
     container_name: ${NODE_CONTAINER_NAME}
     image: node:${NODE_VERSION}
+    user: ${NODE_USER}
     restart: always
     working_dir: /src
     env_file:
@@ -33,3 +34,21 @@ services:
     volumes:
       - './data/db/mysql:/var/lib/mysql'
       - ${SQL_DUMP}:/docker-entrypoint-initdb.d
+  mysql_authentication_test:
+    image: mysql:${MYSQL_VERSION_TEST}
+    container_name: ${MYSQL_HOST_TEST}
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    env_file:
+      - '.env'
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DB_TEST}
+      - MYSQL_DATABASE_TEST=${MYSQL_DB_TEST}
+      - MYSQL_ROOT_USER=${MYSQL_USER_TEST}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWD_TEST}
+      - MYSQL_USER=${MYSQL_USER_DEV_TEST}
+      - MYSQL_PASSWORD=${MYSQL_PASSWD_DEV_TEST}
+    ports:
+      - '${MYSQL_PORT_TEST}:${MYSQL_PORT}'
+    volumes:
+      - './data/db/mysql_testing:/var/lib/mysql'
