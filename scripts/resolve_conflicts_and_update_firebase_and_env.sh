@@ -83,7 +83,7 @@ do
             echo "Recuerde que no se actualizará firebase hasta seleccionar la opción: \"Actualizar firebase con los datos seleccionados\""
         ;;
         2)  # Si firebase contiene keys que .env no tiene insertamos las claves de firebase en el .env
-            echo -e "Actualizados los siguientes valores en el .env\n"
+            echo -e "Actualizados los siguientes valores en el .env:"
             for line in $DIFF_VALUES_ENV_TO_FIREBASE
             do
                 LINE_KEY=$(echo "$line" | cut -d '=' -f1)

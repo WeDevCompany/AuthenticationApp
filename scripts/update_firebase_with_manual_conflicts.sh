@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source "${BASH_SOURCE%/*}/ensure.sh"
+ensure::curl
 AUTH=$(grep -w AUTH .firebase_oauth | cut -d '=' -f2)
 MANUAL_CHANGES_FILE_NAME=update_firebase_with_manual_conflicts.commit.firebase
 ACTION="PATCH"
