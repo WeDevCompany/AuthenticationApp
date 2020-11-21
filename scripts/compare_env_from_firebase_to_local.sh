@@ -121,19 +121,22 @@ then
     echo -e "$DIFF_VALUES_ENV_TO_FIREBASE\n" >> diff_values_firebase_and_env.temp.txt
 fi
 
+MANUAL_CHANGES_FILE_NAME=update_firebase_with_manual_conflicts.commit.firebase
+
 echo -e "Existen conflictos que deben ser resueltos:\n"
 echo -e "$(cat diff_values_firebase_and_env.temp.txt)\n"
 
 while true
 do
-    echo "========================================================="
+    echo -e "========================================================="
     echo "                        OPCIONES                         "
     echo "========================================================="
     echo " 1 - Modificar firebase con los valores del .env"
     echo " 2 - Modificar .env con los valores de firebase"
     echo " 3 - Resolver los conflictos manualmente"
-    echo " 4 - Mostrar los conflictos"
-    echo " 5 - Salir"
+    echo " 4 - Actualizar firebase con los datos seleccionados"
+    echo " 5 - Mostrar los conflictos"
+    echo " 6 - Salir"
     echo "=========================================================="
     echo "Selecione una opcion:"
     read opcion
@@ -151,7 +154,9 @@ do
                 done
 
                 JSON_TO_PUT=$(echo $JSON_TO_PUT"}" | sed -zr 's/,([^,]*$)/\1/')
-                echo $JSON_TO_PUT > update_firebase_with_manual_conflicts.commit.firebase
+                echo $JSON_TO_PUT > $MANUAL_CHANGES_FILE_NAME
+                echo "Datos preparados para subir a firebase en el archivo $MANUAL_CHANGES_FILE_NAME"
+                echo "Recuerde que no se actualizará firebase hasta seleccionar la opción: \"Actualizar firebase con los datos seleccionados\""
             fi
         ;;
         2)  # Si firebase contiene keys que .env no tiene insertamos las claves de firebase en el .env
@@ -205,14 +210,18 @@ do
                 if [ "$JSON_TO_PUT" != "{" ]
                 then
                     JSON_TO_PUT=$(echo $JSON_TO_PUT"}" | sed -zr 's/,([^,]*$)/\1/')
-                    echo $JSON_TO_PUT > update_firebase_with_manual_conflicts.commit.firebase
-                    echo "Datos preparados para subir a firebase en el archivo update_firebase_with_manual_conflicts.commit.firebase"
+                    echo $JSON_TO_PUT > $MANUAL_CHANGES_FILE_NAME
+                    echo "Datos preparados para subir a firebase en el archivo $MANUAL_CHANGES_FILE_NAME"
+                    echo "Recuerde que no se actualizará firebase hasta seleccionar la opción: \"Actualizar firebase con los datos seleccionados\""
                 fi
             fi
         ;;
-        4) echo -e "\n$(cat diff_values_firebase_and_env.temp.txt)\n"
+        4) 
+            bash scripts/update_firebase_with_manual_conflicts.sh
         ;;
-        5)exit
+        5) echo -e "\n$(cat diff_values_firebase_and_env.temp.txt)\n"
+        ;;
+        6)exit
         ;;
     esac
 done
