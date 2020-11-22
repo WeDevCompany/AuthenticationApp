@@ -11,24 +11,24 @@ function update_firebase_keys_with_env_keys() {
     AUTH=$(grep -w AUTH .firebase_oauth | cut -d '=' -f2)
     ACTION="PATCH"
 
-    # Descargamos todos los datos de firebase y los metemos en un archivo temporal
+    # We download all the data from firebase and put it in a temporary file
     ensure::firebase_env
 
-    # Obtenemos todos los datos del .env y los metemos en un archivo temporal
+    # We get all the data from the .env and put it in a temporary file
     ensure::env
 
-    # A partir del archivo temporal con los datos de firebase generamos un archivo temporal que solo contenga las claves
+    # From the temporary file with the firebase data we generate a temporary file that only contains the keys
     sed 's/=.*//' $FIREBASE_FILE_TEMP | sed -e '/^[ \t]*#/d' | sed '/^[[:space:]]*$/d' | sort > $FIREBASE_KEY_TEMP
 
-    # A partir del archivo temporal con los datos del .env generamos un archivo temporal que solo contenga las claves
+    # From the temporary file with the .env data we generate a temporary file that only contains the keys
     sed 's/=.*//' $ENV_FILE_TEMP | sed -e '/^[ \t]*#/d' | sed '/^[[:space:]]*$/d' | sort > $ENV_KEY_TEMP
 
-    # Comparamos las claves del .env que no se encuentran en firebase
+    # We compare the keys of the .env that are not in firebase
     ensure::diff_env $FIREBASE_KEY_TEMP $ENV_KEY_TEMP diff_key_firebase_to_env.temp.txt
 
     DIFF_KEY_FIREBASE_TO_ENV=$(cat diff_key_firebase_to_env.temp.txt)
 
-    # Si .env contiene keys que firebase no tiene insertamos las claves del .env en firebase 
+    # If .env contains keys that firebase does not have, we insert the keys of the .env in firebase 
     if [ ! -z "$DIFF_KEY_FIREBASE_TO_ENV" ]
     then
         echo "The content of the firebase does not correspond to that of .env"

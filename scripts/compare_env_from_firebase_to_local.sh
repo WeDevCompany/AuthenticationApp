@@ -18,11 +18,11 @@ then
     exit 0
 fi
 
-# Si .env contiene keys que firebase no tiene insertamos las claves del .env en firebase 
+# If .env contains keys that firebase does not have, we insert the keys of the .env in firebase 
 update_firebase_keys_with_env_keys
 
-# Si firebase contiene keys que .env no tiene insertamos las claves de firebase en el .env
+# If firebase contains keys that .env does not have, we insert the firebase keys in the .env
 update_env_keys_with_firebase_keys
 
-# Recorremos firebase y .env mostrando las diferencias y resolviendolas manualmente cada una
+# We go through firebase and .env showing the differences and solving them manually each one
 resolve_conflicts_and_update_firebase_and_env

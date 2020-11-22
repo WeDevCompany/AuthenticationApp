@@ -14,19 +14,19 @@ function resolve_conflicts_and_update_firebase_and_env() {
     while true
     do
         echo -e "\n========================================================="
-        echo "                        OPCIONES                         "
+        echo "                        OPTIONS                         "
         echo "========================================================="
-        echo " 1 - Modificar firebase con los valores del .env"
-        echo " 2 - Modificar .env con los valores de firebase"
-        echo " 3 - Resolver los conflictos manualmente"
-        echo " 4 - Actualizar firebase con los datos seleccionados"
-        echo " 5 - Mostrar los conflictos"
-        echo " 6 - Salir"
+        echo " 1 - Modify firebase with the values ​​of the .env"
+        echo " 2 - Modify .env with firebase values"
+        echo " 3 - Resolve conflicts manually"
+        echo " 4 - Update firebase with selected data"
+        echo " 5 - Show conflicts"
+        echo " 6 - Exit"
         echo "=========================================================="
         echo "Selecione una opcion:"
         read opcion
         case $opcion in
-            1)  # Si .env contiene keys que firebase no tiene insertamos las claves del .env en un archivo para actualizar posteriormente firebase
+            1)  # If .env contains keys that firebase does not have, we insert the .env keys into a file to later update firebase
                 JSON_TO_PUT="{"
                 for line in $DIFF_VALUES_FIREBASE_TO_ENV
                 do
@@ -38,11 +38,11 @@ function resolve_conflicts_and_update_firebase_and_env() {
 
                 JSON_TO_PUT=$(echo $JSON_TO_PUT"}" | sed -zr 's/,([^,]*$)/\1/')
                 echo $JSON_TO_PUT > $MANUAL_CHANGES_FILE_NAME
-                echo "Datos preparados para subir a firebase en el archivo $MANUAL_CHANGES_FILE_NAME"
-                echo "Recuerde que no se actualizará firebase hasta seleccionar la opción: \"Actualizar firebase con los datos seleccionados\""
+                echo "Data ready to upload to firebase in file $MANUAL_CHANGES_FILE_NAME"
+                echo "Remember that firebase will not be updated until the option is selected: \"Update firebase with selected data\""
             ;;
-            2)  # Si firebase contiene keys que .env no tiene insertamos las claves de firebase en el .env
-                echo -e "Actualizados los siguientes valores en el .env:"
+            2)  # If firebase contains keys that .env does not have, we insert the firebase keys in the .env
+                echo -e "Updated the following values ​​in the .env:"
                 for line in $DIFF_VALUES_ENV_TO_FIREBASE
                 do
                     LINE_KEY=$(echo "$line" | cut -d '=' -f1)
@@ -51,7 +51,7 @@ function resolve_conflicts_and_update_firebase_and_env() {
                     sed -i "/${LINE_KEY}=/c ${LINE_KEY}=${LINE_VALUE}" .env;
                 done
             ;;
-            3)  # Recorremos ambos ficheros mostrando las diferencias y resolviendolas manualmente cada una
+            3)  # We go through both files showing the differences and solving them manually each one
                 JSON_TO_PUT="{"
                 for line in $DIFF_VALUES_ENV_TO_FIREBASE
                 do
@@ -61,11 +61,11 @@ function resolve_conflicts_and_update_firebase_and_env() {
                     LINE_ENV_VALUE=$(grep -w "$LINE_KEY" $DIFF_VALUES_FIREBASE_TO_ENV_FILE | cut -d '=' -f2)
 
                     echo "=========================================================="
-                    echo "Selecione con que datos te quieres quedar:"
+                    echo "Select which data you want to keep:"
                     echo "=========================================================="
-                    echo "1 - Actualizar .env con los valores de firebase - $LINE_KEY=$LINE_FIREBASE_VALUE"
-                    echo "2 - Actualizar firebase con los valores de .env - $LINE_KEY=$LINE_ENV_VALUE"
-                    echo "3 - No resolver conflicto"
+                    echo "1 - Update .env with firebase values - $LINE_KEY=$LINE_FIREBASE_VALUE"
+                    echo "2 - Update firebase with .env values - $LINE_KEY=$LINE_ENV_VALUE"
+                    echo "3 - Do not resolve conflict"
                     echo "=========================================================="
                     read changesFrom
                     case $changesFrom in
@@ -74,16 +74,16 @@ function resolve_conflicts_and_update_firebase_and_env() {
                             CHECK_VALUE=$(grep -w $LINE_KEY .env | cut -d '=' -f2)
                             if [ "$CHECK_VALUE" != "$LINE_FIREBASE_VALUE" ]
                             then
-                                echo "ERROR: Ha ocurrido un error al modificar los datos en el .env"
+                                echo "ERROR: An error occurred while modifying the data in the .env"
                             else
-                                echo "Datos modificados correctamente en el .env"
+                                echo "Data successfully modified in .env"
                             fi 
                         ;;
                         2)
                             JSON_TO_PUT=$JSON_TO_PUT""\"$LINE_KEY\"":"\"$LINE_ENV_VALUE\"","
                         ;;
                         3)
-                            echo "Conflicto no resuelto para la key: $LINE_KEY"
+                            echo "Unresolved conflict for key: $LINE_KEY"
                         ;;
                     esac
                 done
@@ -92,8 +92,8 @@ function resolve_conflicts_and_update_firebase_and_env() {
                 then
                     JSON_TO_PUT=$(echo $JSON_TO_PUT"}" | sed -zr 's/,([^,]*$)/\1/')
                     echo $JSON_TO_PUT > $MANUAL_CHANGES_FILE_NAME
-                    echo "Datos preparados para subir a firebase en el archivo $MANUAL_CHANGES_FILE_NAME"
-                    echo "Recuerde que no se actualizará firebase hasta seleccionar la opción: \"Actualizar firebase con los datos seleccionados\""
+                    echo "Data ready to upload to firebase in file $MANUAL_CHANGES_FILE_NAME"
+                    echo "Remember that firebase will not be updated until the option is selected: \"Update firebase with selected data\""
                 fi
             ;;
             4) 
