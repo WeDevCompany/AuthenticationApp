@@ -1,6 +1,10 @@
 #!/bin/bash
 
 source "${BASH_SOURCE%/*}/ensure.sh"
+source "${BASH_SOURCE%/*}/update_firebase_keys_with_env_keys.sh"
+source "${BASH_SOURCE%/*}/update_env_keys_with_firebase_keys.sh"
+source "${BASH_SOURCE%/*}/resolve_conflicts_and_update_firebase_and_env.sh"
+
 ensure::jq
 ensure::curl
 AUTH=$(grep -w AUTH .firebase_oauth | cut -d '=' -f2)
@@ -15,10 +19,10 @@ then
 fi
 
 # Si .env contiene keys que firebase no tiene insertamos las claves del .env en firebase 
-bash scripts/update_firebase_keys_with_env_keys.sh
+update_firebase_keys_with_env_keys
 
 # Si firebase contiene keys que .env no tiene insertamos las claves de firebase en el .env
-bash scripts/update_env_keys_with_firebase_keys.sh
+update_env_keys_with_firebase_keys
 
 # Recorremos firebase y .env mostrando las diferencias y resolviendolas manualmente cada una
-bash scripts/resolve_conflicts_and_update_firebase_and_env.sh
+resolve_conflicts_and_update_firebase_and_env
