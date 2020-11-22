@@ -37,11 +37,12 @@ function update_firebase_keys_with_env_keys() {
         JSON_TO_PUT="{"
         for line in $DIFF_KEY_FIREBASE_TO_ENV
         do
-            LINE_VALUE=$(grep -w $line .env | cut -d '=' -f2)
+            LINE_VALUE=$(grep -w $line .env | cut -d '=' -f2 | sed 's/"/\\"/g')
             JSON_TO_PUT=$JSON_TO_PUT""\"$line\"":"\"$LINE_VALUE\"","
         done
 
         JSON_TO_PUT=$(echo $JSON_TO_PUT"}" | sed -zr 's/,([^,]*$)/\1/')
+        echo "$JSON_TO_PUT"
         curl -X $ACTION -d $JSON_TO_PUT https://authenticacionapp-44d60.firebaseio.com/AuthenticationApp.json?auth=${AUTH}
         echo -e ""
     fi
