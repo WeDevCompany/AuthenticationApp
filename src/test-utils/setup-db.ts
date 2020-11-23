@@ -6,7 +6,7 @@ require("tsconfig-paths/register")
 import "dotenv/config"
 import { createConnection } from "typeorm";
 import { MysqlConnectionOptions } from "typeorm/driver/mysql/MysqlConnectionOptions";
-import { DatabaseConnectionTestConfiguration } from "../../ormconfig"
+import { DatabaseConnectionTestConfiguration } from  "../../ormconfig";
 
 /*
  * This file is executed by Jest before running any tests.

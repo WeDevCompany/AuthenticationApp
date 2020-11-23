@@ -18,16 +18,16 @@ const DatabaseConnectionConfiguration: ConnectionOptions = {
   migrations: [__dirname + '/**/*.migration.ts'],
   subscribers: [__dirname + '/**/*.subscriber.ts'],
   cli: {
-    entitiesDir: 'src/entity',
-    migrationsDir: 'src/migration',
-    subscribersDir: 'src/subscriber',
+    entitiesDir: __dirname + './typeorm/entity',
+    migrationsDir: __dirname + './typeorm/migration',
+    subscribersDir: __dirname + './typeorm/subscriber',
   },
 };
 
 const DatabaseConnectionTestConfiguration: ConnectionOptions = {
-  name: process.env.MYSQL_DB_TEST,
+  name: 'default',
   type: 'mysql',
-  host: process.env.MYSQL_HOST,
+  host: process.env.MYSQL_HOST_TEST,
   port: port,
   username: process.env.MYSQL_USER,
   password: process.env.MYSQL_PASSWD,
@@ -39,10 +39,11 @@ const DatabaseConnectionTestConfiguration: ConnectionOptions = {
   migrations: [__dirname + '/**/*.migration.ts'],
   subscribers: [__dirname + '/**/*.subscriber.ts'],
   cli: {
-    entitiesDir: 'src/entity',
-    migrationsDir: 'src/migration',
-    subscribersDir: 'src/subscriber',
+    entitiesDir: __dirname + './typeorm/entity',
+    migrationsDir: __dirname + './typeorm/migration',
+    subscribersDir: __dirname + './typeorm/subscriber',
   },
 };
 
 export { DatabaseConnectionConfiguration, DatabaseConnectionTestConfiguration };
+module.exports = { DatabaseConnectionConfiguration, DatabaseConnectionTestConfiguration };

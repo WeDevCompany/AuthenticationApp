@@ -3,7 +3,7 @@ import { ConnectionOptions } from 'typeorm';
 
 const port: number = Number.parseInt(process.env.MYSQL_PORT);
 
-const DatabaseConnectionTestConfiguration: ConnectionOptions = {
+const DatabaseConnectionJestConfiguration: ConnectionOptions = {
   name: 'default',
   type: 'mysql',
   host: process.env.LOCALHOST,
@@ -24,4 +24,5 @@ const DatabaseConnectionTestConfiguration: ConnectionOptions = {
   },
 };
 
-module.exports = DatabaseConnectionTestConfiguration;
+export {DatabaseConnectionJestConfiguration};
+module.exports = DatabaseConnectionJestConfiguration;

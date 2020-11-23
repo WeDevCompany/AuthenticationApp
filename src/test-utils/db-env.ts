@@ -1,9 +1,11 @@
 import { getConnection } from "typeorm"
 import { createDatabaseConnection } from "./test-db-connection"
 
+
 beforeAll(async () => {
-  await createDatabaseConnection()
+  await createDatabaseConnection();
 })
+
 afterAll(async () => {
-  await getConnection().close()
+  await getConnection().close();
 })

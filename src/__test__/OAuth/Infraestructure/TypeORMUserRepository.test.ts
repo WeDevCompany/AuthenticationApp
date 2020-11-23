@@ -1,31 +1,37 @@
-//@ts-ignore
-require('../../../DatabaseConnection');
-//@ts-ignore
-import { container, appMiddleware } from './Kernel';
-//@ts-ignore
-import { UserORM } from '../../../OAuth/Infraestructure/UserORM.entity';
-import DatabaseTestingConnection from '../../../DatabaseTestingConnection';
+
 import { DatabaseConnectionTestConfiguration } from '../../../../ormconfig';
 import PROVIDER from '../../../constant/providers';
 import { User } from '../../../OAuth/Domain/User';
 import { TypeORMUserRepository } from '../../../OAuth/Infraestructure/TypeORMUserRepository';
+import { getConnection } from "typeorm"
+import { createDatabaseConnection } from '../../../test-utils/test-db-connection';
+
 
 describe('Feature1Test', () => {
   let repo: TypeORMUserRepository;
-  const TIMEOUT_FOR_SLOW_TEST: number = 30000;
+  let queryRunner;
+  //const TIMEOUT_FOR_SLOW_TEST: number = 30000;
 
   beforeAll(async () => {
-    await DatabaseTestingConnection.create();
+    await createDatabaseConnection();
+    queryRunner = getConnection().createQueryRunner();
     repo = await new TypeORMUserRepository(DatabaseConnectionTestConfiguration);
-  });
-
+  })
+  
   afterAll(async () => {
-    await DatabaseTestingConnection.close();
-  });
+    await getConnection().close();
+  })
 
-  beforeEach(async () => {
-    await DatabaseTestingConnection.clear();
-  });
+
+  beforeEach(async() => {
+    
+    // lets now open a new transaction:
+    await queryRunner.startTransaction();
+  })
+
+  afterEach(async () => {
+    await queryRunner.rollbackTransaction();
+  })
 
   describe('[Integration] TypeORMUserRepository trying to use all the methods of the repository', () => {
     it(
@@ -44,7 +50,6 @@ describe('Feature1Test', () => {
         const userFromDb: User = await repo.findUserByID('1');
         expect(await userFromDb.equals(userToInsert)).toBe(true);
       },
-      TIMEOUT_FOR_SLOW_TEST,
     );
     it(
       'should delete a user',
@@ -60,10 +65,8 @@ describe('Feature1Test', () => {
         await repo.createUser(userToInsert);
         await repo.deleteUser(userToInsert.id);
         const userFromDb: User = await repo.findUserByID(userToInsert.id);
-        console.log(userFromDb);
         expect(await userFromDb.equals(userToInsert)).toBe(true);
       },
-      TIMEOUT_FOR_SLOW_TEST,
     );
   });
 });

@@ -7,6 +7,6 @@ module.exports = {
     '<rootDir>**/__test__/**/?(*.)(spec|test).{js,jsx,ts,tsx}',
   ],
   modulePathIgnorePatterns: ['<rootDir>/dist/', '<rootDir>/data/', '<rootDir>/node_modules/'],
-  globalSetup: "./src/test-utils/setup-db.ts",
-  setupFilesAfterEnv: ["./src/test-utils/db-env.ts"],
+  //globalSetup: "./src/test-utils/setup-db.ts",
+  //setupFilesAfterEnv: ["./src/test-utils/db-env.ts"],
 };
