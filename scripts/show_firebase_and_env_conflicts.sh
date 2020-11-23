@@ -1,6 +1,7 @@
 #!/bin/bash
 
 source "${BASH_SOURCE%/*}/ensure.sh"
+source "${BASH_SOURCE%/*}/firebase/functions.sh"
 
 function show_firebase_and_env_conflicts() {
     ensure::jq
@@ -12,10 +13,10 @@ function show_firebase_and_env_conflicts() {
     DIFF_VALUES_FIREBASE_AND_ENV_FILE=diff_values_firebase_and_env.temp.txt
 
     # We download all the data from firebase and put it in a temporary file
-    ensure::firebase_env
+    firebase::donwload_and_generate_env_temp
 
     # We get all the data from the .env and put it in a temporary file
-    ensure::env
+    env::generate_env_temp
 
     # We compare the values ​​with their .env keys that are not found in firebase
     diff $FIREBASE_FILE_TEMP $ENV_FILE_TEMP | grep '>' | sed 's/> *//' > $DIFF_VALUES_FIREBASE_TO_ENV_FILE

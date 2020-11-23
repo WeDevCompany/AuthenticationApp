@@ -3,7 +3,7 @@
 source "${BASH_SOURCE%/*}/ensure.sh"
 source "${BASH_SOURCE%/*}/firebase/functions.sh"
 
-function env::update_env_keys_with_firebase_keys() {
+function firebase::delete_firebase_keys_with_env_keys() {
     generate_key_temp_files
 
     # We compare the firebase keys not found in the .env
@@ -11,25 +11,25 @@ function env::update_env_keys_with_firebase_keys() {
 
     DIFF_KEY_ENV_TO_FIREBASE=$(cat diff_key_env_to_firebase.temp.txt)
 
-    # If firebase contains keys that .env does not have, we insert the firebase keys in the .env
+    # If firebase contains keys that .env does not have, we delete the firebase keys that are not in the .env
     if [ ! -z "$DIFF_KEY_ENV_TO_FIREBASE" ]
     then
-        echo "The content of the .env does not correspond to that of firebase"
-        echo "the following keys are not found in .env:"
+        echo "The content of the firebase does not correspond to that of .env"
+        echo "The following keys are not found in .env:"
         echo "=========================================================="
         echo "$(cat diff_key_env_to_firebase.temp.txt)"
         echo "=========================================================="
-        echo " 1 - Update .env keys"
+        echo " 1 - Delete firebase keys"
         echo " 2 - Do not make modifications in .env"
         echo "=========================================================="
         echo "Select option:"
         read opcion
         case $opcion in
             1)
-                env::update_keys $DIFF_KEY_ENV_TO_FIREBASE
+                firebase::delete_keys $DIFF_KEY_ENV_TO_FIREBASE
             ;;
             2)
-                echo "No modification made in .env"
+                echo "No modification made in firebase"
             ;;
         esac
     fi

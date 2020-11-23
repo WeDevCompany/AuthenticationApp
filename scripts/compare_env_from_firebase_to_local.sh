@@ -2,7 +2,9 @@
 
 source "${BASH_SOURCE%/*}/ensure.sh"
 source "${BASH_SOURCE%/*}/update_firebase_keys_with_env_keys.sh"
+source "${BASH_SOURCE%/*}/delete_firebase_keys_with_env_keys.sh"
 source "${BASH_SOURCE%/*}/update_env_keys_with_firebase_keys.sh"
+source "${BASH_SOURCE%/*}/delete_env_keys_with_firebase_keys.sh"
 source "${BASH_SOURCE%/*}/resolve_conflicts_and_update_firebase_and_env.sh"
 
 ensure::jq
@@ -19,10 +21,16 @@ then
 fi
 
 # If .env contains keys that firebase does not have, we insert the keys of the .env in firebase 
-update_firebase_keys_with_env_keys
+firebase::update_firebase_keys_with_env_keys
+
+# If firebase contains keys that .env does not have, we delete the firebase keys that are not in the .env
+firebase::delete_firebase_keys_with_env_keys
 
 # If firebase contains keys that .env does not have, we insert the firebase keys in the .env
-update_env_keys_with_firebase_keys
+env::update_env_keys_with_firebase_keys
+
+# If .env contains keys that firebase does not have, we delete the .env keys that are not in the firebase
+env::delete_env_keys_with_firebase_keys
 
 # We go through firebase and .env showing the differences and solving them manually each one
 resolve_conflicts_and_update_firebase_and_env

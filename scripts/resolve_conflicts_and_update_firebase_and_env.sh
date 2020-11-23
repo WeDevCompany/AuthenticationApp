@@ -23,7 +23,7 @@ function resolve_conflicts_and_update_firebase_and_env() {
         echo " 5 - Show conflicts"
         echo " 6 - Exit"
         echo "=========================================================="
-        echo "Selecione una opcion:"
+        echo "Select option:"
         read opcion
         case $opcion in
             1)  # If .env contains keys that firebase does not have, we insert the .env keys into a file to later update firebase
