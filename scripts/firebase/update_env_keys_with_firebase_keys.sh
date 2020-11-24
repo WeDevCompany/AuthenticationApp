@@ -1,13 +1,13 @@
 #!/bin/bash
 
-source "${BASH_SOURCE%/*}/ensure.sh"
-source "${BASH_SOURCE%/*}/firebase/functions.sh"
+source "${BASH_SOURCE%/*}/../ensure.sh"
+source "${BASH_SOURCE%/*}/functions.sh"
 
 function env::update_env_keys_with_firebase_keys() {
     generate_key_temp_files
 
     # We compare the firebase keys not found in the .env
-    ensure::diff_env $ENV_KEY_TEMP $FIREBASE_KEY_TEMP diff_key_env_to_firebase.temp.txt
+    diff_env $ENV_KEY_TEMP $FIREBASE_KEY_TEMP diff_key_env_to_firebase.temp.txt
 
     DIFF_KEY_ENV_TO_FIREBASE=$(cat diff_key_env_to_firebase.temp.txt)
 

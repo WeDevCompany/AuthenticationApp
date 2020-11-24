@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source "${BASH_SOURCE%/*}/ensure.sh"
+source "${BASH_SOURCE%/*}/../ensure.sh"
 
 function update_firebase_with_manual_conflicts() {
     ensure::curl

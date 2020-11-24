@@ -18,7 +18,3 @@ function ensure::curl() {
 	  sudo apt-get --yes install $REQUIRED_PKG 
 	fi
 }
-
-function ensure::diff_env() {
-	grep -v -F -x -f $1 $2 > $3
-}

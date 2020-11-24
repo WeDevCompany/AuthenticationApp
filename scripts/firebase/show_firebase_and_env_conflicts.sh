@@ -1,7 +1,7 @@
 #!/bin/bash
 
-source "${BASH_SOURCE%/*}/ensure.sh"
-source "${BASH_SOURCE%/*}/firebase/functions.sh"
+source "${BASH_SOURCE%/*}/../ensure.sh"
+source "${BASH_SOURCE%/*}/functions.sh"
 
 function show_firebase_and_env_conflicts() {
     ensure::jq

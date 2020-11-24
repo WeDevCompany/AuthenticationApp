@@ -1,11 +1,11 @@
 #!/bin/bash
 
 source "${BASH_SOURCE%/*}/ensure.sh"
-source "${BASH_SOURCE%/*}/update_firebase_keys_with_env_keys.sh"
-source "${BASH_SOURCE%/*}/delete_firebase_keys_with_env_keys.sh"
-source "${BASH_SOURCE%/*}/update_env_keys_with_firebase_keys.sh"
-source "${BASH_SOURCE%/*}/delete_env_keys_with_firebase_keys.sh"
-source "${BASH_SOURCE%/*}/resolve_conflicts_and_update_firebase_and_env.sh"
+source "${BASH_SOURCE%/*}/firebase/update_firebase_keys_with_env_keys.sh"
+source "${BASH_SOURCE%/*}/firebase/delete_firebase_keys_with_env_keys.sh"
+source "${BASH_SOURCE%/*}/firebase/update_env_keys_with_firebase_keys.sh"
+source "${BASH_SOURCE%/*}/firebase/delete_env_keys_with_firebase_keys.sh"
+source "${BASH_SOURCE%/*}/firebase/resolve_conflicts_and_update_firebase_and_env.sh"
 
 ensure::jq
 ensure::curl

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source "${BASH_SOURCE%/*}/ensure.sh"
+source "${BASH_SOURCE%/*}/../ensure.sh"
 source "${BASH_SOURCE%/*}/show_firebase_and_env_conflicts.sh"
 source "${BASH_SOURCE%/*}/update_firebase_with_manual_conflicts.sh"
 
@@ -42,13 +42,21 @@ function resolve_conflicts_and_update_firebase_and_env() {
                 echo "Remember that firebase will not be updated until the option is selected: \"Update firebase with selected data\""
             ;;
             2)  # If firebase contains keys that .env does not have, we insert the firebase keys in the .env
-                echo -e "Updated the following values ​​in the .env:"
                 for line in $DIFF_VALUES_ENV_TO_FIREBASE
                 do
                     LINE_KEY=$(echo "$line" | cut -d '=' -f1)
                     LINE_VALUE=$(echo "$line" | cut -d '=' -f2)
-                    echo "${LINE_KEY}=${LINE_VALUE}"
-                    sed -i "/${LINE_KEY}=/c ${LINE_KEY}=${LINE_VALUE}" .env;
+                    LINE_EXISTS_IN_ENV=$(grep -w "$line" .env)
+                    if [ -z  "$LINE_EXISTS_IN_ENV" ]
+                    then
+                        echo "The key do not exists in .env, insert key and value in .env:"
+                        echo -e "${LINE_KEY}=${LINE_VALUE}"
+                        echo -e "${LINE_KEY}=${LINE_VALUE}" >> .env
+                    else
+                        echo -e "Updated the following values ​​in the .env:"
+                        echo "${LINE_KEY}=${LINE_VALUE}"
+                        sed -i "/${LINE_KEY}=/c ${LINE_KEY}=${LINE_VALUE}" .env;
+                    fi     
                 done
             ;;
             3)  # We go through both files showing the differences and solving them manually each one

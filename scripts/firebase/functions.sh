@@ -84,3 +84,7 @@ function generate_key_temp_files() {
     # From the temporary file with the .env data we generate a temporary file that only contains the keys
     sed 's/=.*//' $ENV_FILE_TEMP | sed -e '/^[ \t]*#/d' | sed '/^[[:space:]]*$/d' | sort > $ENV_KEY_TEMP
 }
+
+function diff_env() {
+	grep -v -F -x -f $1 $2 > $3
+}
