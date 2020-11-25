@@ -5,7 +5,7 @@ import { TypeORMUserRepository } from '../../../OAuth/Infraestructure/TypeORMUse
 import { Connection, getConnection } from 'typeorm';
 import { createDatabaseConnection } from '../../../../test-utils/test-db-connection';
 
-describe('Feature1Test', () => {
+describe('[Integration] TypeORMUserRepository', () => {
   let repo: TypeORMUserRepository;
   let connection: Connection;
   let queryRunner;
@@ -27,6 +27,7 @@ describe('Feature1Test', () => {
   });
 
   afterEach(async () => {
+    // TODO: no rollback
     await queryRunner.rollbackTransaction();
   });
 
@@ -54,6 +55,7 @@ describe('Feature1Test', () => {
         image: 'https://unsplash.com/photos/6uneKLGrJPs',
         provider: PROVIDER.GOOGLE,
       });
+
       await repo.createUser(userToInsert);
       await repo.deleteUser(userToInsert.id);
       const userFromDb: User = await repo.findUserByID(userToInsert.id);

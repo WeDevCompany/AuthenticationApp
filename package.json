@@ -27,6 +27,7 @@
     "docker:test": "./scripts/test.sh",
     "docker:test-staged": "./scripts/test-staged.sh",
     "docker:typorm": "./scripts/typeorm.sh $@",
+    "docker:reset-env": "./scripts/rest_docker_env.sh",
     "db:reset": "./scripts/db_reset.sh",
     "db:create-database": "./scripts/create_db_mysql.sh",
     "db:generate-database-script": "./scripts/generate_db.sh",
@@ -34,7 +35,7 @@
     "start:watch": "./node_modules/.bin/nodemon ./src/index.ts",
     "typeorm": "node_modules/.bin/ts-node  ./node_modules/typeorm/cli --config ./ormconfig.ts",
     "todo": "./scripts/todo.sh",
-    "scripts:permissions": "sudo chmod +x ./scripts/* || true && ls -la ./scripts  && sudo chown -R $USER:$USER data || true && sudo chown -R $USER:$USER coverage || true && sudo chown -R $USER:$USER ./node_modules || true && sudo chown -R $USER:$USER ormlogs.log || true",
+    "scripts:permissions": "sudo chmod +x ./scripts/* || true && ls -la ./scripts && sudo chown -R $USER:$USER ./data || true && sudo chown -R $USER:$USER coverage || true && sudo chown -R $USER:$USER ./node_modules || true && sudo chown -R $USER:$USER ormlogs.log || true",
     "scripts:firebase-to-env": "./scripts/firebase_to_env_if_not_exists.sh",
     "scripts:force-firebase-to-env": "./scripts/force_firebase_to_env.sh",
     "scripts:generate-session-tokens": "./scripts/generate_session_token.sh",
@@ -46,7 +47,10 @@
       "**/*.test.ts",
       "**/*.spec.ts",
       ".git",
-      "node_modules"
+      "node_modules",
+      "data",
+      "src/data",
+      "src/node_modules"
     ],
     "watch": [
       "src"
