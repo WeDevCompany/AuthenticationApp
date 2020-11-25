@@ -3,7 +3,7 @@ import PROVIDER from '../../../constant/providers';
 import { User } from '../../../OAuth/Domain/User';
 import { TypeORMUserRepository } from '../../../OAuth/Infraestructure/TypeORMUserRepository';
 import { getConnection } from 'typeorm';
-import { createDatabaseConnection } from '../../../test-utils/test-db-connection';
+import { createDatabaseConnection } from '../../../../test-utils/test-db-connection';
 
 describe('Feature1Test', () => {
   let repo: TypeORMUserRepository;
