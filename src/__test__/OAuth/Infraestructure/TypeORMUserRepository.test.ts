@@ -2,20 +2,22 @@ import { DatabaseConnectionTestConfiguration } from '../../../../ormconfig';
 import PROVIDER from '../../../constant/providers';
 import { User } from '../../../OAuth/Domain/User';
 import { TypeORMUserRepository } from '../../../OAuth/Infraestructure/TypeORMUserRepository';
-import { getConnection } from 'typeorm';
+import { Connection, getConnection } from 'typeorm';
 import { createDatabaseConnection } from '../../../../test-utils/test-db-connection';
 
 describe('Feature1Test', () => {
   let repo: TypeORMUserRepository;
+  let connection: Connection;
   let queryRunner;
 
   beforeAll(async () => {
-    await createDatabaseConnection();
-    queryRunner = getConnection().createQueryRunner();
+    connection = await createDatabaseConnection();
+    queryRunner = connection.createQueryRunner();
     repo = await new TypeORMUserRepository(DatabaseConnectionTestConfiguration);
   });
 
   afterAll(async () => {
+    queryRunner.release();
     await getConnection().close();
   });
 
@@ -55,7 +57,7 @@ describe('Feature1Test', () => {
       await repo.createUser(userToInsert);
       await repo.deleteUser(userToInsert.id);
       const userFromDb: User = await repo.findUserByID(userToInsert.id);
-      expect(await userFromDb.equals(userToInsert)).toBe(true);
+      expect(await userFromDb).toBe(null);
     });
   });
 });

@@ -25,13 +25,16 @@ class TypeORMUserRepository implements UserRepository {
   async deleteUser(id: string) {
     const ORMRepo = await this.databaseConnection.getRepository(UserORM);
     const user = await ORMRepo.findOne({ where: { id: id } });
-    user.deleteAt = Date.now().toString();
+    user.deleteAt = new Date();
     await ORMRepo.save(user);
   }
 
-  async findUserByID(id: string): Promise<User> {
+  async findUserByID(id: string): Promise<User | null> {
     const ORMRepo = await this.databaseConnection.getRepository(UserORM);
     const user = await ORMRepo.findOne({ where: { id: id, deleteAt: IsNull() } });
+    if (!user) {
+      return null;
+    }
     return this.ormUserToDomainUser(user);
   }
 
