@@ -47,10 +47,10 @@
       "**/*.test.ts",
       "**/*.spec.ts",
       ".git",
-      "node_modules",
-      "data",
-      "src/data",
-      "src/node_modules"
+      "./node_modules",
+      "./data",
+      "./src/data",
+      "./src/node_modules"
     ],
     "watch": [
       "src"

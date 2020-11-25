@@ -1,3 +1,14 @@
+First steps:
+
+```
+npm run docker:reset-env
+npm install && npm run scripts:permissions && npm run docker:watch
+# wait until fails
+npm run docker:stop
+npm run scripts:permissions
+npm run docker:watch
+```
+
 # Tasks
 
 ## Back
