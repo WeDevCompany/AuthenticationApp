@@ -11,6 +11,7 @@ function show_firebase_and_env_conflicts() {
     DIFF_VALUES_FIREBASE_TO_ENV_FILE=diff_values_firebase_to_env.temp.txt
     DIFF_VALUES_ENV_TO_FIREBASE_FILE=diff_values_env_to_firebase.temp.txt
     DIFF_VALUES_FIREBASE_AND_ENV_FILE=diff_values_firebase_and_env.temp.txt
+    DIFF_KEYS_FIREBASE_AND_ENV_FILE=diff_keys_firebase_and_env.temp.txt
 
     # We download all the data from firebase and put it in a temporary file
     firebase::donwload_and_generate_env_temp
@@ -25,6 +26,10 @@ function show_firebase_and_env_conflicts() {
     # We compare the values ​​with your firebase keys not found in the .env
     diff $FIREBASE_FILE_TEMP $ENV_FILE_TEMP | grep '<' | sed 's/< *//' > $DIFF_VALUES_ENV_TO_FIREBASE_FILE
     DIFF_VALUES_ENV_TO_FIREBASE=$(cat $DIFF_VALUES_ENV_TO_FIREBASE_FILE)
+
+    # We compare the firebase and .env keys and obtain uniq diff keys
+    diff $FIREBASE_FILE_TEMP $ENV_FILE_TEMP | grep '<\|>' | sed 's/> *//' | sed 's/< *//' | sed 's/=.*//' | sort | uniq > $DIFF_KEYS_FIREBASE_AND_ENV_FILE
+    DIFF_KEYS_FIREBASE_AND_ENV=$(cat $DIFF_KEYS_FIREBASE_AND_ENV_FILE)
 
     # We check if there is any conflict
     if [ -z "$DIFF_VALUES_FIREBASE_TO_ENV" ] && [ -z "$DIFF_VALUES_ENV_TO_FIREBASE" ]
