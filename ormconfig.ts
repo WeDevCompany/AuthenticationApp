@@ -25,7 +25,7 @@ const DatabaseConnectionConfiguration: ConnectionOptions = {
 };
 
 const DatabaseConnectionTestConfiguration: ConnectionOptions = {
-  name: 'default',
+  name: process.env.MYSQL_TEST_NAME,
   type: 'mysql',
   host: process.env.MYSQL_HOST_TEST,
   port: port,
@@ -33,6 +33,7 @@ const DatabaseConnectionTestConfiguration: ConnectionOptions = {
   password: process.env.MYSQL_PASSWD,
   database: process.env.MYSQL_DB_TEST,
   synchronize: true,
+  dropSchema: true,
   logging: true,
   logger: 'file',
   entities: [__dirname + '/**/*.entity.ts'],
