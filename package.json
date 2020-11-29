@@ -73,17 +73,17 @@
       "npm run lint:fix",
       "npm run todo:file",
       "npm run docker:test-staged",
+      "npm run scripts:compare-firebase-and-env",
+      "npm run generate_env_example",
       "git add ."
     ],
     "**/*.{md,yml,yaml,json}": [
       "npm run format",
       "npm run lint:fix",
       "npm run todo:file",
+      "npm run scripts:compare-firebase-and-env",
+      "npm run generate_env_example",
       "git add ."
-    ],
-    "**/*.{env}": [
-      "npm run scripts:force-firebase-to-env",
-      "npm run generate_env_example"
     ]
   },
   "dependencies": {

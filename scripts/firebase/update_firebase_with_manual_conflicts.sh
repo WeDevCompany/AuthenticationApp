@@ -12,7 +12,7 @@ function update_firebase_with_manual_conflicts() {
     if [ ! -f $MANUAL_CHANGES_FILE_NAME ]
     then
         echo "The file with the manual changes to upload to firebase does not exist"
-        return [n]
+        return 0
     fi
 
     JSON_MANUAL_CHANGES=$(cat $MANUAL_CHANGES_FILE_NAME | sed '/^[[:space:]]*$/d')
@@ -37,7 +37,7 @@ function delete_firebase_with_manual_conflicts() {
     if [ ! -f $DELETE_KEYS_FILE_NAME ]
     then
         echo "The file with the manual changes to delete in firebase does not exist"
-        return [n]
+        return 0
     fi
 
     JSON_MANUAL_CHANGES=$(cat $DELETE_KEYS_FILE_NAME)
