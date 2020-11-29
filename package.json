@@ -84,6 +84,12 @@
       "npm run scripts:compare-firebase-and-env",
       "npm run generate_env_example",
       "git add ."
+    ],
+    "**/*.sh": [
+      "npm run todo:file",
+      "npm run scripts:compare-firebase-and-env",
+      "npm run generate_env_example",
+      "git add ."
     ]
   },
   "dependencies": {
