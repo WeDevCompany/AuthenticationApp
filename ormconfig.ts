@@ -14,13 +14,13 @@ const DatabaseConnectionConfiguration: ConnectionOptions = {
   synchronize: true,
   logging: true,
   logger: 'file',
-  entities: [__dirname + '/**/*.entity.ts'],
-  migrations: [__dirname + '/**/*.migration.ts'],
-  subscribers: [__dirname + '/**/*.subscriber.ts'],
+  entities: ['./**/*.entity.ts'],
+  migrations: ['./**/*.migration.ts'],
+  subscribers: ['./**/*.subscriber.ts'],
   cli: {
-    entitiesDir: __dirname + './typeorm/entity',
-    migrationsDir: __dirname + './typeorm/migration',
-    subscribersDir: __dirname + './typeorm/subscriber',
+    entitiesDir: './typeorm/entity',
+    migrationsDir: './typeorm/migration',
+    subscribersDir: './typeorm/subscriber',
   },
 };
 
@@ -36,15 +36,15 @@ const DatabaseConnectionTestConfiguration: ConnectionOptions = {
   dropSchema: true,
   logging: true,
   logger: 'file',
-  entities: [__dirname + '/**/*.entity.ts'],
-  migrations: [__dirname + '/**/*.migration.ts'],
-  subscribers: [__dirname + '/**/*.subscriber.ts'],
+  entities: ['./**/*.entity.ts'],
+  migrations: ['./**/*.migration.ts'],
+  subscribers: ['./**/*.subscriber.ts'],
   cli: {
-    entitiesDir: __dirname + './typeorm/entity',
-    migrationsDir: __dirname + './typeorm/migration',
-    subscribersDir: __dirname + './typeorm/subscriber',
+    entitiesDir: './typeorm/entity',
+    migrationsDir: './typeorm/migration',
+    subscribersDir: './typeorm/subscriber',
   },
 };
 
 export { DatabaseConnectionConfiguration, DatabaseConnectionTestConfiguration };
-module.exports = { DatabaseConnectionConfiguration, DatabaseConnectionTestConfiguration };
+//module.exports = { DatabaseConnectionConfiguration, DatabaseConnectionTestConfiguration };
