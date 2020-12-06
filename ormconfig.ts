@@ -2,6 +2,7 @@ require('dotenv').config();
 import { ConnectionOptions } from 'typeorm';
 
 const port: number = Number.parseInt(process.env.MYSQL_PORT);
+//const testPort: number = Number.parseInt(process.env.MYSQL_PORT_TEST);
 
 const DatabaseConnectionConfiguration: ConnectionOptions = {
   name: process.env.MYSQL_HOST,
@@ -11,11 +12,11 @@ const DatabaseConnectionConfiguration: ConnectionOptions = {
   username: process.env.MYSQL_USER,
   password: process.env.MYSQL_PASSWD,
   database: process.env.MYSQL_DB,
-  synchronize: true,
+  //synchronize: true,
   logging: true,
   logger: 'file',
   entities: ['./**/*.entity.ts'],
-  migrations: ['./**/*.migration.ts'],
+  migrations: ['./typeorm/migration/**/*.ts'],
   subscribers: ['./**/*.subscriber.ts'],
   cli: {
     entitiesDir: './typeorm/entity',
@@ -28,7 +29,7 @@ const DatabaseConnectionTestConfiguration: ConnectionOptions = {
   name: process.env.MYSQL_TEST_NAME,
   type: 'mysql',
   host: process.env.MYSQL_HOST_TEST,
-  port: port,
+  port: 3306,
   username: process.env.MYSQL_USER,
   password: process.env.MYSQL_PASSWD,
   database: process.env.MYSQL_DB_TEST,
@@ -37,7 +38,7 @@ const DatabaseConnectionTestConfiguration: ConnectionOptions = {
   logging: true,
   logger: 'file',
   entities: ['./**/*.entity.ts'],
-  migrations: ['./**/*.migration.ts'],
+  migrations: ['./typeorm/migration/**/*.ts'],
   subscribers: ['./**/*.subscriber.ts'],
   cli: {
     entitiesDir: './typeorm/entity',

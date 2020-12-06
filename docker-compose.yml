@@ -15,6 +15,9 @@ services:
     environment:
       - PORT=${NODE_PORT}
     command: sh -c "npm install && npm audit fix --force && npm run start:watch"
+    depends_on:
+      - mysql_authentication
+      - mysql_authentication_test
   mysql_authentication:
     image: mysql:${MYSQL_VERSION}
     container_name: ${MYSQL_HOST}
