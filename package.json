@@ -83,25 +83,16 @@
     }
   },
   "lint-staged": {
-    "**/*.{jsx,js,ts,css,sass,less,scss,vue}": [
-      "npm run format",
-      "npm run lint:fix",
-      "npm run todo:file",
-      "npm run docker:test-staged",
-      "npm run generate_env_example",
-      "git add ."
-    ],
-    "**/*.{md,yml,yaml,json}": [
-      "npm run format",
-      "npm run lint:fix",
-      "npm run todo:file",
+    "**/*.{jsx,js,ts,css,sass,less,scss,vue,md,yml,yaml,json,sh}": [
       "gnome-terminal --disable-factory -- bash -c \"npm run scripts:compare-firebase-and-env;exit 0;exec bash\"",
       "npm run generate_env_example",
       "git add ."
     ],
-    "**/*.sh": [
+    "**/*.{jsx,js,ts,css,sass,less,scss,vue,md,yml,yaml,json}": [
+      "npm run format",
+      "npm run lint:fix",
       "npm run todo:file",
-      "npm run generate_env_example",
+      "npm run docker:test-staged",
       "git add ."
     ]
   },

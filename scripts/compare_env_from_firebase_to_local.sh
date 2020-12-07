@@ -1,5 +1,12 @@
 #!/bin/bash
 
+exitfn () {
+    trap SIGINT
+    (rm *.temp.txt || true) && (rm *.commit.firebase || true)
+    exit 0;
+}
+trap "exitfn" INT
+
 source "${BASH_SOURCE%/*}/ensure.sh"
 source "${BASH_SOURCE%/*}/firebase/update_firebase_keys_with_env_keys.sh"
 source "${BASH_SOURCE%/*}/firebase/delete_firebase_keys_with_env_keys.sh"
@@ -13,6 +20,8 @@ AUTH=$(grep -w AUTH .firebase_oauth | cut -d '=' -f2)
 VALUES=$(curl https://authenticacionapp-44d60.firebaseio.com/AuthenticationApp.json?auth=${AUTH})
 FIREBASE_MD5_ENV=$(curl https://authenticacionapp-44d60.firebaseio.com/AuthenticationApp.json?auth=${AUTH} | jq -r "to_entries|map(\"\(.key)=\(.value|tostring)\")|.[]" | sed '/^[[:space:]]*$/d' | sort | md5sum | cut -d' ' -f1)
 MD5_ENV=$(cat .env | sed -e '/^[ \t]*#/d' | sed '/^[[:space:]]*$/d' | sort | md5sum | cut -d' ' -f1)
+
+(rm *.temp.txt || true) && (rm *.commit.firebase || true)
 
 if [ "$FIREBASE_MD5_ENV" = "$MD5_ENV" ]
 then

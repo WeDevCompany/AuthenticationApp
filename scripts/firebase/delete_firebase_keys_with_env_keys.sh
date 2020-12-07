@@ -20,7 +20,7 @@ function firebase::delete_firebase_keys_with_env_keys() {
         echo "$(cat diff_key_env_to_firebase.temp.txt)"
         echo "=========================================================="
         echo " 1 - Delete firebase keys"
-        echo " 2 - Do not make modifications in .env"
+        echo " 2 - Do not make modifications in firebase"
         echo "=========================================================="
         echo "Select option:"
         read opcion
