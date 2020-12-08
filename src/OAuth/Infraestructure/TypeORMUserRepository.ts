@@ -5,6 +5,7 @@ import { UserORM } from './UserORM.entity';
 import { injectable } from 'inversify';
 import { inject } from 'inversify';
 import TYPES from '../../constant/types';
+import { DateTime } from '../Domain/DateTime';
 
 @injectable()
 class TypeORMUserRepository implements UserRepository {
@@ -25,7 +26,7 @@ class TypeORMUserRepository implements UserRepository {
   async deleteUser(id: string) {
     const ORMRepo = await this.databaseConnection.getRepository(UserORM);
     const user = await ORMRepo.findOne({ where: { id: id } });
-    user.deleteAt = new Date();
+    user.deleteAt = DateTime.now();
     await ORMRepo.save(user);
   }
 

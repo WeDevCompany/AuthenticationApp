@@ -6,8 +6,8 @@ const port: number = Number.parseInt(process.env.MYSQL_PORT);
 const DatabaseConnectionCLIConfiguration: ConnectionOptions = {
   name: 'default',
   type: 'mysql',
-  // host: 'localhost',
-  host: process.env.MYSQL_HOST,
+  host: 'localhost',
+  // host: process.env.MYSQL_HOST,
   port: port,
   username: process.env.MYSQL_USER,
   password: process.env.MYSQL_PASSWD,
