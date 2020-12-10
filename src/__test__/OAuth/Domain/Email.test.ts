@@ -1,7 +1,7 @@
 import { Email } from '../../../OAuth/Domain/Email';
 
-const VALID_EMAILS = ['evrtrabajo@pep.com', 'evrtrabajo@pep', 'e@pep'];
-const INVALID_EMAILS = ['evrtrabajopep.com', 'e @pep', 'evrtrabajo@pep.'];
+const VALID_EMAILS = ['evrtrabajo@pep.com', 'evrtrabajo@pep.com', 'e@pep.com'];
+const INVALID_EMAILS = ['evrtrabajopep.com', 'e @pep', 'evrtrabajo@pep.', 'evr.trabajo@gmail'];
 const EMPTY_EMAIL = '';
 
 describe('It should validate the email attribute', () => {
