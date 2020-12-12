@@ -10,6 +10,9 @@ wait until fails
 ```
 npm run docker:stop
 npm run scripts:permissions
+npm run docker:start
+sleep 20
+npm run typeorm:run
 npm run docker:watch
 ```
 

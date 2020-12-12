@@ -14,7 +14,7 @@ services:
       - ${NODE_PORT}:${NODE_PORT}
     environment:
       - PORT=${NODE_PORT}
-    command: sh -c "npm install && npm audit fix --force && npm run start:watch"
+    command: sh -c "npm config set unsafe-perm=true && npm install && npm audit fix --force && npm run start:watch"
     depends_on:
       - mysql_authentication
       - mysql_authentication_test
@@ -34,7 +34,7 @@ services:
     ports:
       - '${MYSQL_PORT}:${MYSQL_PORT}'
     volumes:
-      - './data/db/mysql:/var/lib/mysql'
+      - '../data/db/mysql:/var/lib/mysql'
       - ${SQL_DUMP}:/docker-entrypoint-initdb.d
   mysql_authentication_test:
     image: mysql:${MYSQL_VERSION_TEST}
@@ -52,4 +52,4 @@ services:
     ports:
       - '${MYSQL_PORT_TEST}:${MYSQL_PORT}'
     volumes:
-      - './data/db/mysql_testing:/var/lib/mysql'
+      - '../data/db/mysql_testing:/var/lib/mysql'
