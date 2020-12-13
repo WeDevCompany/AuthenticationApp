@@ -58,6 +58,7 @@ class TypeORMUserRepository implements UserRepository {
   domainUserToOrmUserData(user: User): object {
     return {
       id: user.id,
+      idFromProvider: user.idFromProvider,
       displayName: user.displayName,
       username: user.username,
       image: user.image,

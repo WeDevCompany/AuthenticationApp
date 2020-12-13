@@ -4,7 +4,7 @@ import { ValidUser } from '../../../OAuth/Domain/ValidUser';
 
 const DATA = [
   {
-    id: '1',
+    idFromProvider: '1',
     displayName: 'Della',
     username: '@Cox',
     email: 'DellaDCox@superrito.com',
@@ -12,7 +12,7 @@ const DATA = [
     provider: PROVIDER.GOOGLE,
   },
   {
-    id: '2',
+    idFromProvider: '2',
     displayName: 'ksjdfh kasjdfh ',
     username: '@lsdkfjlksjdf',
     email: 'DellaDCox@superrito.com',
@@ -20,7 +20,7 @@ const DATA = [
     provider: PROVIDER.GITHUB,
   },
   {
-    id: '3',
+    idFromProvider: '3',
     displayName: 'sdf kasjdfh ',
     username: '@sdfsdf',
     email: 'DellaDCox@superrito.com',
@@ -33,7 +33,7 @@ const VALID_USER_DATA: ValidUser[] = new Array<ValidUser>(...DATA);
 
 const INVALID_DATA = [
   {
-    id: '',
+    idFromProvider: '',
     displayName: 'ksjdfh kasjdfh ',
     username: '@lsdkfjlksjdf',
     email: 'DellaDCox@superrito.com',
@@ -41,7 +41,7 @@ const INVALID_DATA = [
     provider: 'google',
   },
   {
-    id: '2',
+    idFromProvider: '2',
     displayName: '',
     username: '@lsdkfjlksjdf',
     email: 'DellaDCox@superrito.com',
@@ -49,7 +49,7 @@ const INVALID_DATA = [
     provider: 'google',
   },
   {
-    id: '3',
+    idFromProvider: '3',
     displayName: 'ksjdfh kasjdfh ',
     username: '',
     email: 'DellaDCox@superrito.com',
@@ -57,7 +57,7 @@ const INVALID_DATA = [
     provider: 'google',
   },
   {
-    id: '4',
+    idFromProvider: '4',
     displayName: 'ksjdfh kasjdfh ',
     username: '@lsdkfjlksjdf',
     email: '@superrito.com',
@@ -65,7 +65,7 @@ const INVALID_DATA = [
     provider: 'google',
   },
   {
-    id: '5',
+    idFromProvider: '5',
     displayName: 'ksjdfh kasjdfh ',
     username: '@lsdkfjlksjdf',
     email: 'DellaDCox@superrito.com',
@@ -73,7 +73,7 @@ const INVALID_DATA = [
     provider: 'google',
   },
   {
-    id: '6',
+    idFromProvider: '6',
     displayName: 'ksjdfh kasjdfh ',
     username: '@lsdkfjlksjdf',
     email: 'DellaDCox@superrito.com',
@@ -81,7 +81,7 @@ const INVALID_DATA = [
     provider: 'GOOGLE',
   },
   {
-    id: '7',
+    idFromProvider: '7',
     displayName: 'ksjdfh kasjdfh ',
     username: '@lsdkfjlksjdf',
     email: 'DellaDCox@superrito.com',
@@ -93,7 +93,7 @@ const INVALID_DATA = [
 const INVALID_USER_DATA: ValidUser[] = new Array<ValidUser>(...INVALID_DATA);
 
 const USER_JSON: ValidUser = {
-  id: '1',
+  idFromProvider: '1',
   displayName: 'Della',
   username: '@Cox',
   email: 'DellaDCox@superrito.com',
@@ -111,7 +111,7 @@ describe('It should create users with the correct data', () => {
   it('should return a valid JSON from a user', () => {
     expect(
       new User({
-        id: '1',
+        idFromProvider: '1',
         displayName: 'Della',
         username: '@Cox',
         email: 'DellaDCox@superrito.com',

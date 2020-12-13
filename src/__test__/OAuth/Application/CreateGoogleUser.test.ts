@@ -7,7 +7,7 @@ import PROVIDER from '../../../constant/providers';
 
 const USERS_DATA: ValidUser[] = [
   {
-    id: '1dfgsdfg',
+    idFromProvider: '1dfgsdfg',
     displayName: 'Della',
     username: 'Cox',
     image: 'https://goole.com',
@@ -15,7 +15,7 @@ const USERS_DATA: ValidUser[] = [
     provider: PROVIDER.GOOGLE,
   },
   {
-    id: 'sdfsdf',
+    idFromProvider: 'sdfsdf',
     displayName: 'Denn',
     username: 'dsfgff',
     image: 'https://twitter.com',

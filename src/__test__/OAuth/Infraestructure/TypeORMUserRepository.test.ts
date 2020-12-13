@@ -26,7 +26,7 @@ describe('[Integration] TypeORMUserRepository', () => {
   describe('[Integration] TypeORMUserRepository trying to use all the methods of the repository', () => {
     it('should insert a new user', async () => {
       const userToInsert: User = new User({
-        id: '1',
+        idFromProvider: '1',
         displayName: 'Della',
         username: '@Coxi',
         email: 'DellaDCox@superrito.com',
@@ -35,12 +35,12 @@ describe('[Integration] TypeORMUserRepository', () => {
       });
       await repo.createUser(userToInsert);
 
-      const userFromDb: User = await repo.findUserByID('1');
+      const userFromDb: User = await repo.findUserByID(userToInsert.id);
       expect(await userFromDb.equals(userToInsert)).toBe(true);
     });
     it('should delete a user', async () => {
       const userToInsert: User = new User({
-        id: '2',
+        idFromProvider: '2',
         displayName: 'Antonio',
         username: '@Chj',
         email: 'AntonioChj@superrito.com',

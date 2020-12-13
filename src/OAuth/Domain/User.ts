@@ -6,9 +6,11 @@ import { Email } from './Email';
 import { InvalidUserError } from './InvalidUserError';
 import { ValidUser } from './ValidUser';
 import { UserName } from './UsesrName';
+import { UUID } from './UUID';
 
 export class User {
-  _id: Id;
+  _id: UUID;
+  _idFromProvider: Id;
   _displayName: Name;
   _username: UserName;
   _image: Image;
@@ -18,7 +20,8 @@ export class User {
   constructor(user: ValidUser) {
     // TODO: Refactor it should be able to handle multiple errors
     try {
-      this.id = user.id;
+      this._id = new UUID();
+      this.idFromProvider = user.idFromProvider;
       this.displayName = user.displayName;
       this.username = user.username;
       this.image = user.image;
@@ -37,8 +40,12 @@ export class User {
     return this._id.value;
   }
 
-  set id(id: string) {
-    this._id = new Id(id);
+  get idFromProvider(): string {
+    return this._idFromProvider.value;
+  }
+
+  set idFromProvider(idFromProvider: string) {
+    this._idFromProvider = new Id(idFromProvider);
   }
 
   get displayName(): string {
@@ -84,7 +91,7 @@ export class User {
   equals(user: ValidUser): boolean {
     const comparator = new User(user);
     return (
-      this._id.equals(comparator._id) &&
+      this._idFromProvider.equals(comparator._idFromProvider) &&
       this._displayName.equals(comparator._displayName) &&
       this._image.equals(comparator._image) &&
       this._username.equals(comparator._username) &&

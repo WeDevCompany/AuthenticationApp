@@ -1,5 +1,5 @@
 interface ValidUser {
-  readonly id: string;
+  readonly idFromProvider: string;
   readonly displayName: string;
   readonly username: string;
   readonly image: string;
