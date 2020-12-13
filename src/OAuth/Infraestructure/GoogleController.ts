@@ -45,7 +45,7 @@ export class GoogleController {
     const createGoogleUser = new CreateGoogleUser(this.repo, this.logger);
     try {
       return await createGoogleUser.execute({
-        id: user._json.sub,
+        idFromProvider: user._json.sub,
         displayName: user._json.name,
         username: user._json.email,
         image: user._json.picture,
@@ -66,7 +66,7 @@ export class GoogleController {
       return await deleteGoogleUser.execute(idParam);
     } catch (error) {
       this.logger.error(error);
-      response.sendStatus(500);
+      response.sendStatus(404);
     }
   }
 }

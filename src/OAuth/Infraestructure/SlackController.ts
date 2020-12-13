@@ -44,7 +44,7 @@ export class SlackController {
     const createSlackUser = new CreateSlackUser(this.repo, this.logger);
 
     return createSlackUser.execute({
-      id: user.id,
+      idFromProvider: user.id,
       displayName: user.name,
       username: user.name,
       image: user.image_512,
@@ -61,7 +61,7 @@ export class SlackController {
       return await deleteSlackUser.execute(idParam);
     } catch (error) {
       this.logger.error(error);
-      response.sendStatus(500);
+      response.sendStatus(404);
     }
   }
 }

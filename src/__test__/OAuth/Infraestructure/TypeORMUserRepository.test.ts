@@ -50,8 +50,7 @@ describe('[Integration] TypeORMUserRepository', () => {
 
       await repo.createUser(userToInsert);
       await repo.deleteUser(userToInsert.id);
-      const userFromDb: User = await repo.findUserByID(userToInsert.id);
-      expect(await userFromDb).toBe(null);
+      await expect(repo.findUserByID(userToInsert.id)).rejects.toThrow(/^UserNotExists.*/);
     });
   });
 });

@@ -47,7 +47,7 @@ export class GithubController {
     const displayName = user.displayName ? user.displayName : user.username;
 
     return createGithubUser.execute({
-      id: user.id,
+      idFromProvider: user.id,
       displayName: displayName,
       username: user.username,
       image: user.photos[0].value,
@@ -64,7 +64,7 @@ export class GithubController {
       return await deleteGithubUser.execute(idParam);
     } catch (error) {
       this.logger.error(error);
-      response.sendStatus(500);
+      response.sendStatus(404);
     }
   }
 }

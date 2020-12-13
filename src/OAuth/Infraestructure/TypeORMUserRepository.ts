@@ -12,6 +12,7 @@ import { injectable } from 'inversify';
 import { inject } from 'inversify';
 import TYPES from '../../constant/types';
 import { DateTime } from '../Domain/DateTime';
+import { UserNotExists } from '../Domain/UserNotExists';
 
 @injectable()
 class TypeORMUserRepository implements UserRepository {
@@ -31,7 +32,10 @@ class TypeORMUserRepository implements UserRepository {
 
   async deleteUser(id: string) {
     const ORMRepo = await this.databaseConnection.getRepository(UserORM);
-    const user = await ORMRepo.findOne({ where: { id: id } });
+    const user = await ORMRepo.findOne({ where: { id: id, deleteAt: IsNull() } });
+    if (!user) {
+      throw new UserNotExists(`The user with id ${id} does not exists`);
+    }
     user.deleteAt = DateTime.now();
     await ORMRepo.save(user);
   }
@@ -40,7 +44,7 @@ class TypeORMUserRepository implements UserRepository {
     const ORMRepo = await this.databaseConnection.getRepository(UserORM);
     const user = await ORMRepo.findOne({ where: { id: id, deleteAt: IsNull() } });
     if (!user) {
-      return null;
+      throw new UserNotExists(`The user with id ${id} does not exists`);
     }
     return this.ormUserToDomainUser(user);
   }
