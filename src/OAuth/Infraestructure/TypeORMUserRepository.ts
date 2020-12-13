@@ -1,5 +1,11 @@
 import { User } from './../Domain/User';
-import { Connection, getConnectionManager, IsNull, ConnectionOptions } from 'typeorm';
+import {
+  Connection,
+  getConnectionManager,
+  IsNull,
+  ConnectionOptions,
+  /*getConnection,*/
+} from 'typeorm';
 import { UserRepository } from '../Domain/UserRepository';
 import { UserORM } from './UserORM.entity';
 import { injectable } from 'inversify';

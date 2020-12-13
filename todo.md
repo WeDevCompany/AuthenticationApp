@@ -19,6 +19,3 @@ src/OAuth/Infraestructure/PassportConfig.ts
 
 src/OAuth/Infraestructure/PassportSerializationService.ts
 //[1;31m TODO: [mIt have a meaningful purpose if it's not injected on the PassportOAuthAutenticationService
-
-src/__test__/OAuth/Infraestructure/TypeORMUserRepository.test.ts
-    //[1;31m TODO: [mno rollback

@@ -9,6 +9,7 @@ describe('[Integration] TypeORMUserRepository', () => {
   let repo: TypeORMUserRepository;
   let connection: Connection;
   let queryRunner;
+  const USER_ORM_TABLE = 'user_orm';
 
   beforeAll(async () => {
     connection = await createDatabaseConnection();
@@ -17,18 +18,9 @@ describe('[Integration] TypeORMUserRepository', () => {
   });
 
   afterAll(async () => {
+    await queryRunner.query(`TRUNCATE TABLE ${USER_ORM_TABLE}`);
     queryRunner.release();
     await getConnection().close();
-  });
-
-  beforeEach(async () => {
-    // lets now open a new transaction:
-    await queryRunner.startTransaction();
-  });
-
-  afterEach(async () => {
-    // TODO: no rollback
-    await queryRunner.rollbackTransaction();
   });
 
   describe('[Integration] TypeORMUserRepository trying to use all the methods of the repository', () => {
@@ -36,7 +28,7 @@ describe('[Integration] TypeORMUserRepository', () => {
       const userToInsert: User = new User({
         id: '1',
         displayName: 'Della',
-        username: '@Cox',
+        username: '@Coxi',
         email: 'DellaDCox@superrito.com',
         image: 'https://unsplash.com/photos/6uneKLGrJPs',
         provider: PROVIDER.GOOGLE,
