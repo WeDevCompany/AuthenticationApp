@@ -1,5 +1,5 @@
 import { UserRepository } from './../Domain/UserRepository';
-import { controller, httpGet } from 'inversify-express-utils';
+import { controller, httpGet, response, requestParam } from 'inversify-express-utils';
 import { Request, Response, NextFunction } from 'express';
 import { OauthMiddleware } from './OauthMiddleware';
 import { Logger } from '../../Logger';
@@ -7,6 +7,7 @@ import { inject } from 'inversify';
 import TYPES from '../../constant/types';
 import { CreateGithubUser } from '../Application/CreateGithubUser';
 import PROVIDER from '../../constant/providers';
+import { DeleteGithubUser } from '../Application/DeleteGithubUser';
 const OAUTH_PROVIDER = 'github';
 const OAUTH_CONFIG = {
   scope: ['user:email'],
@@ -53,5 +54,17 @@ export class GithubController {
       email: email,
       provider: PROVIDER.GITHUB,
     });
+  }
+
+  @httpGet('/delete/:id')
+  public async delete(@response() response: Response, @requestParam('id') idParam: string) {
+    const deleteGithubUser = new DeleteGithubUser(this.repo, this.logger);
+
+    try {
+      return await deleteGithubUser.execute(idParam);
+    } catch (error) {
+      this.logger.error(error);
+      response.sendStatus(500);
+    }
   }
 }
