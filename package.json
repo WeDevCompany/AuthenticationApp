@@ -56,6 +56,7 @@
     "todo": "./scripts/todo.sh",
     "scripts:permissions": "sudo chmod +x ./scripts/* || true && ls -la ./scripts && sudo chown -R $USER:$USER ../data || true && sudo chown -R $USER:$USER coverage || true && sudo chown -R $USER:$USER ./node_modules || true && sudo chown -R $USER:$USER ormlogs.log || true",
     "scripts:firebase-to-env": "./scripts/firebase_to_env_if_not_exists.sh",
+    "scripts:firebase-to-env-with-auth-parameter": "./scripts/firebase_to_env_with_auth_parameter.sh",
     "scripts:force-firebase-to-env": "./scripts/force_firebase_to_env.sh",
     "scripts:compare-firebase-and-env": "./scripts/compare_env_from_firebase_to_local.sh",
     "scripts:generate-session-tokens": "./scripts/generate_session_token.sh",
