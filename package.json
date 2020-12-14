@@ -136,7 +136,8 @@
     "passport-slack": "0.0.7",
     "passport-slack-oauth2": "^1.0.2",
     "reflect-metadata": "^0.1.10",
-    "typeorm": "0.2.29"
+    "typeorm": "0.2.29",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",

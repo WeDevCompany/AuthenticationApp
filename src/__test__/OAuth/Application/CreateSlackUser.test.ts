@@ -8,22 +8,22 @@ import PROVIDER from '../../../constant/providers';
 const USERS_DATA: ValidUser[] = [
   {
     idFromProvider: '1dfgsdfg',
-    displayName: 'Della',
-    username: 'Cox',
-    image: 'https://goole.com',
-    email: 'DellaDCox@superrito.com',
-    provider: PROVIDER.GOOGLE,
+    displayName: 'Francisco',
+    username: 'frank',
+    image: 'https://slack.com',
+    email: 'Frank@superrito.com',
+    provider: PROVIDER.SLACK,
   },
   {
     idFromProvider: 'sdfsdf',
-    displayName: 'Denn',
-    username: 'dsfgff',
-    image: 'https://twitter.com',
-    email: 'Denn@dsfgff.com',
-    provider: PROVIDER.GOOGLE,
+    displayName: 'Taza',
+    username: 'polimero',
+    image: 'https://slack.com',
+    email: 'Taza@dsfgff.com',
+    provider: PROVIDER.SLACK,
   },
 ];
-describe('[UNIT] - CreateGoogleUser application service', () => {
+describe('[UNIT] - CreateSlackUser application service', () => {
   let repository: UserRepository;
   beforeAll(() => {
     const logger = new ConsoleLogger();

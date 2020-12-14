@@ -4,7 +4,7 @@ import { InputService } from '../../InputService';
 import { Logger } from '../../Logger';
 import { UserRepository } from '../Domain/UserRepository';
 
-export class DeleteGoogleUser implements InputService {
+export class DeleteSlackUser implements InputService {
   private readonly logger: Logger;
   private readonly repo: UserRepository;
 
