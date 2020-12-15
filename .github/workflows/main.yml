@@ -11,10 +11,10 @@ jobs:
 
     steps:
       - name: 🕎 Clone and checkout of the actual branch
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
 
       - name: Node install
-      - uses: actions/setup-node@v1
+        uses: actions/setup-node@v1
         with:
           node-version: '12'
           check-latest: true
