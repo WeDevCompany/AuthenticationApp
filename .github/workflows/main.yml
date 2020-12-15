@@ -18,7 +18,7 @@ jobs:
         with:
           node-version: '12'
           check-latest: true
-        run: npm install
+      - run: npm install
 
       - name: Generate enviroment variables
         run: npm run scripts:firebase-to-env-with-auth-parameter ${{ secrets.FIREBASE_TOKEN }}
