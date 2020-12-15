@@ -23,8 +23,5 @@ jobs:
       - name: Generate enviroment variables
         run: npm run scripts:firebase-to-env-with-auth-parameter ${{ secrets.FIREBASE_TOKEN }}
 
-      - name: Initializing docker
-        run: npm run docker:start
-
-      - name: Executing test
-        run: npm run docker:test
+      - name: Initializing docker and Executing test
+        run: npm run docker:start && npm run docker:test
