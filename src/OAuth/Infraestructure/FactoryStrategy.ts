@@ -3,6 +3,7 @@ import { SlackStrategy } from './SlackStrategy';
 import { GithubStrategy } from './GithubStrategy';
 import { InvalidStrategyError } from '../Domain/InvalidStrategyError';
 import { Strategy } from '../Domain/Strategy';
+import { TwitterStrategy } from './TwitterStrategy';
 
 function FactoryStrategy(strategy: string): Strategy {
   const strategyLowerCase = strategy.toLowerCase();
@@ -15,6 +16,9 @@ function FactoryStrategy(strategy: string): Strategy {
     }
     case 'github': {
       return new GithubStrategy();
+    }
+    case 'twitter': {
+      return new TwitterStrategy();
     }
     default: {
       throw new InvalidStrategyError(`the strategy ${strategyLowerCase} does not exist`);
