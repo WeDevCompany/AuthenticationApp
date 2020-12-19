@@ -9,7 +9,7 @@ import { UserRepository } from '../Domain/UserRepository';
 import PROVIDER from '../../constant/providers';
 
 const OAUTH_PROVIDER = 'twitter';
-const OAUTH_CONFIG = {};
+const OAUTH_CONFIG = { scope: ['user_friends', 'manage_pages'] };
 
 @controller('/oauth/twitter')
 export class TwitterController {
@@ -28,7 +28,6 @@ export class TwitterController {
     '/callback',
     OauthMiddleware(OAUTH_PROVIDER, OAUTH_CONFIG),
     (request: Request, response: Response, next: NextFunction) => {
-      console.log(request);
       // @ts-ignore
       if (!request.user) {
         console.log('⛔');
@@ -45,12 +44,12 @@ export class TwitterController {
     const createTwitterUser = new CreateTwitterUser(this.repo, this.logger);
     try {
       return await createTwitterUser.execute({
-        id: user._json.sub,
+        id: user._json.id,
         displayName: user._json.name,
-        username: user._json.email,
+        username: user.username,
         image: user._json.picture,
         email: user._json.email,
-        provider: PROVIDER.GOOGLE,
+        provider: PROVIDER.TWITTER,
       });
     } catch (error) {
       this.logger.error(error);

@@ -9,6 +9,7 @@ export class TwitterStrategy implements Strategy {
         consumerKey: process.env.TWITTER_CLIENT_ID,
         consumerSecret: process.env.TWITTER_CLIENT_SECRET,
         callbackURL: `${process.env.DOMAIN_URL}${TWITTER_CALLBACK_URL}`,
+        includeEmail: true,
       },
       function(request, accessToken, refreshToken, profile, done) {
         /*
